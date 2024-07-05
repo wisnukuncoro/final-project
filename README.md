@@ -15,3 +15,5 @@ Proyek ini adalah implementasi Recurrent Neural Network (RNN) dengan menggunakan
 ## Server Requirements
 
 ### On progress
+
+[Link to Code for Modelling](machine-learning/code.ipynb)
