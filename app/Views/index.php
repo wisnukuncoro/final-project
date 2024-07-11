@@ -94,48 +94,53 @@
           <div class="row align-items-center">
             <div class="col-md-6">
               <div class="title">
-                <h2>Dashboard Harga Beras</h2>
+                <h2>Dashboard Harga Sembako</h2>
               </div>
             </div>
           </div>
           <!-- end row -->
         </div>
 
-        <div class="row">
-          <div class="col-xl-4 col-lg-4 col-sm-6">
-            <div class="select-style-1">
-              <div class="select-position select-sm">
-                <select class="light-bg">
-                  <option value="">Pilih Bulan</option>
-                  <option value="">Januari</option>
-                  <option value="">Februari</option>
-                  <option value="">Maret</option>
-                  <option value="">April</option>
-                  <option value="">Mei</option>
-                  <option value="">Juni</option>
-                  <option value="">Juli</option>
-                  <option value="">Agustus</option>
-                  <option value="">September</option>
-                  <option value="">Oktober</option>
-                  <option value="">November</option>
-                  <option value="">Desember</option>
-                </select>
+        <form action="/submit_form" method="post">
+          <div class="row">
+            <div class="col-xl-2 col-lg-4 col-sm-6">
+              <div class="select-style-1">
+                <div class="select-position select-sm">
+                  <select class="light-bg" name="bulan">
+                    <option value="">Pilih Bulan</option>
+                    <option value="1">Januari</option>
+                    <option value="2">Februari</option>
+                    <option value="3">Maret</option>
+                    <option value="4">April</option>
+                    <option value="5">Mei</option>
+                    <option value="6">Juni</option>
+                    <option value="7">Juli</option>
+                    <option value="8">Agustus</option>
+                    <option value="9">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Desember</option>
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-xl-4 col-lg-4 col-sm-6">
-            <div class="select-style-1">
-              <div class="select-position select-sm">
-                <select class="light-bg">
-                  <option value="">Pilih Tahun</option>
-                  <option value="">2024</option>
-                  <option value="">2023</option>
-                  <option value="">2022</option>
-                </select>
+            <div class="col-xl-2 col-lg-4 col-sm-6">
+              <div class="select-style-1">
+                <div class="select-position select-sm">
+                  <select class="light-bg w-100" name="tahun">
+                    <option value="">Pilih Tahun</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                  </select>
+                </div>
               </div>
             </div>
+            <div class="col-xl-2 col-lg-6 col-sm-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
           </div>
-        </div>
+        </form>
 
 
 
