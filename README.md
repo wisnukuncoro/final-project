@@ -6,7 +6,10 @@ Proyek ini adalah implementasi Recurrent Neural Network (RNN) dengan menggunakan
 
 ## Installation & updates
 
-### On progress
+### Library yang digunakan
+
+Pandas -> pip install pandas
+Sqlalchemy -> pip install sqlalchemy
 
 ## Setup
 

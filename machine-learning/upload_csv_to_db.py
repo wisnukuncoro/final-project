@@ -1,5 +1,5 @@
 import pandas as pd
-from sqlalchemy import create_engine, MetaData, Table, Column, Float, Date
+from sqlalchemy import create_engine
 
 # Baca file CSV
 df = pd.read_csv('machine-learning/dataset.csv', parse_dates=['Tanggal'])
@@ -10,25 +10,22 @@ password = ''
 host = 'localhost'
 database = 'final_project' 
 
-engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@{host}/{database}')
-metadata = MetaData()
+column_mapping = {
+  'Tanggal': 'tanggal',
+  'Bawang Merah': 'bawang_merah',
+  'Bawang Putih': 'bawang_putih',
+  'Cabai Merah Keriting': 'cabai_merah_keriting',
+  'Cabai Rawit Merah': 'cabai_rawit_merah',
+  'Daging Sapi': 'daging_sapi',
+  'Daging Ayam': 'daging_ayam',
+  'Telur Ayam': 'telur_ayam',
+  'Beras': 'beras',
+  'Minyak Goreng': 'minyak_goreng',
+}
 
-# Membuat table di database
-table = Table(
-    'dataset', 
-    metadata,
-    Column('Tanggal', Date),
-    Column('Bawang Merah', Float),
-    Column('Bawang Putih', Float),
-    Column('Cabai Merah Keriting', Float),
-    Column('Cabai Rawit Merah', Float),
-    Column('Daging Sapi', Float),
-    Column('Daging Ayam', Float),
-    Column('Telur Ayam', Float),
-    Column('Beras', Float),
-    Column('Minyak Goreng', Float),
-)
-metadata.create_all(engine)
+df.rename(columns=column_mapping, inplace=True)
+
+engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@{host}/{database}')
 
 # Impor data ke tabel
 df.to_sql('dataset', con=engine, if_exists='replace', index=False)

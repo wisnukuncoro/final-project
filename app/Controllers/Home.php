@@ -5,10 +5,10 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class Forecast extends BaseController
+class Home extends BaseController
 {
   public function index()
   {
-    return view('forecast');
+    return view('index');
   }
 }
