@@ -9,14 +9,30 @@ class Dashboard extends BaseController
 {
   public function index()
   {
-    $month = "12";
-    $year = "2022";
+    $month = date('n');
+    $year = date('Y');
     $foodType = "bawang_merah";
 
-    $previousMonth = $month - 1;
-    $comparedMonth = 
+    if ($month == 1) {
+      $comparedMonth = 12;
+      $comparedYear = $year - 1;
+    } else {
+      $comparedMonth = $month - 1;
+      $comparedYear = $year;
+    }
 
-    $data = $this->getData($month, $year, $foodType);
+    $currentData = $this->getData($month, $year, $foodType);
+    $comparedData = $this->getData($comparedMonth, $comparedYear, $foodType);
+
+    $percentageOfPriceChanges = ($currentData['averagePrice'] - $comparedData['averagePrice']) / $currentData['averagePrice'] * 100;
+
+    $data = [
+      'currentData' => $currentData,
+      'comparedData' => $comparedData,
+      'title' => "Dashboard Harga " . ucwords(str_replace('_', ' ', $foodType)),
+      'foodType' => $foodType,
+      'percentageOfPriceChanges' => $percentageOfPriceChanges,
+    ];
 
     return view('dashboard', $data);
   }
@@ -27,67 +43,72 @@ class Dashboard extends BaseController
     $year = $this->request->getPost('year');
     $foodType = $this->request->getPost('foodType');
 
-    
+    if ($month == 1) {
+      $comparedMonth = 12;
+      $comparedYear = $year - 1;
+    } else {
+      $comparedMonth = $month - 1;
+      $comparedYear = $year;
+    }
 
-    // if (empty($month) || empty($year) || empty($foodType)) {
-    //   return redirect()->back()->with('error', 'Bulan, tahun, dan jenis sembako harus dipilih');
-    // }
+    $currentData = $this->getData($month, $year, $foodType);
+    $comparedData = $this->getData($comparedMonth, $comparedYear, $foodType);
 
-    $data = $this->getData($month, $year, $foodType);
+    $percentageOfPriceChanges = ($currentData['averagePrice'] - $comparedData['averagePrice']) / $currentData['averagePrice'] * 100;
+
+    $data = [
+      'title' => "Dashboard Harga " . ucwords(str_replace('_', ' ', $foodType)),
+      'currentData' => $currentData,
+      'comparedData' => $comparedData,
+      'percentageOfPriceChanges' => $percentageOfPriceChanges,
+      'foodType' => $foodType,
+    ];
 
     return view('dashboard', $data);
+  }
 
-    // var_dump($data);
-    //   if (!empty($prices)) {
-    //     $price = array_column($prices, $foodType);
+  public function getAvailableMonthYear()
+  {
+    $dashboardModels = new DashboardModels();
 
-    //     if (empty($price)) {
-    //       return redirect()->back()->with('error', 'Tidak ada data untuk jenis sembako yang dipilih.');
-    //     }
+    $result = $dashboardModels->getAvailableMonthYear();
 
-    //     $date = array_column($prices, 'Tanggal');
+    $month = [];
+    $year = [];
 
-    //     $lowestPrice = min($price);
-    //     $highestPrice = max($price);
-    //     $averagePrice = array_sum($price) / count($price);
-    //     $percentageOfPriceChanges = ((end($price) - reset($price)) / reset($price)) * 100;
+    foreach ($result as $item) {
+      $month[] = $item['month'];
+      $year[] = $item['year'];
+    }
 
-    //     $lowestDate = $date[array_search($lowestPrice, $price)];
-    //     $highestDate = $date[array_search($highestPrice, $price)];
+    $data = [
+      'month' => $month,
+      'year' => $year
+    ];
 
-    //     $labels = array_map(function ($item) {
-    //       return date('d-m-Y', strtotime($item));
-    //     }, $date);
-
-    //     $data = [
-    //       'lowestPrice' => $lowestPrice,
-    //       'lowestDate' => $lowestDate,
-    //       'highestPrice' => $highestPrice,
-    //       'highestDate' => $highestDate,
-    //       'averagePrice' => $averagePrice,
-    //       'percentageOfPriceChanges' => $percentageOfPriceChanges,
-    //       'labels' => $labels,
-    //       'data' => $price
-    //     ];
-
-    //     return view('dashboard', $data);
-    //   } else {
-    //     return redirect()->back()->with('error', 'Tidak ada data yang ditemukan untuk bulan dan tahun yang dipilih');
-    //   }
-    // }
+    return $data;
   }
 
   public function getData($month, $year, $foodType)
   {
     $dashboardModels = new DashboardModels();
+
     $result = $dashboardModels->getPricesByMonth($month, $year, $foodType);
+
+    // if (empty($result)) {
+    //   throw new \Exception("Data not found for the given criteria.");
+    // }
 
     $prices = [];
     $days = [];
 
     foreach ($result as $item) {
-      $days[] = $item['days'];
-      $prices[] = $item['prices'];
+      if ($item['prices'] == 0) {
+        continue;
+      } else {
+        $days[] = $item['days'];
+        $prices[] = $item['prices'];
+      }
     }
 
     $lowestPrice = min($prices);
@@ -98,22 +119,19 @@ class Dashboard extends BaseController
     $highestPriceDateindex = array_search($highestPrice, $prices);
 
     $lowestPriceDate = $days[$lowestPriceDateindex];
-    $highestPriceDate = $days[$highestPriceDateindex]; 
-    
+    $highestPriceDate = $days[$highestPriceDateindex];
+
     $data = [
+      'prices' => $prices,
       'lowestPrice' => $lowestPrice,
       'lowestPriceDate' => $lowestPriceDate,
       'highestPrice' => $highestPrice,
       'highestPriceDate' => $highestPriceDate,
       'averagePrice' => $averagePrice,
-      // 'percentageOfPriceChanges' => null,
       'days' => $days,
       'month' => $month,
       'detailedMonth' => date('F', mktime(0, 0, 0, $month, 1)),
       'year' => $year,
-      'prices' => $prices,
-      'foodType' => $foodType,
-      'title' => "Dashboard Harga " . ucwords(str_replace('_', ' ', $foodType)),
     ];
 
     return $data;

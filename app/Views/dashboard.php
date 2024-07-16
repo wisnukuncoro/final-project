@@ -11,28 +11,23 @@
         <div class="col-md-10">
           <div class="title">
             <h1><?= $title; ?></h1>
-            <h4 class="mt-15"><?= $detailedMonth . " " . $year; ?></h4>
+            <h4 class="mt-15"><?= $currentData['detailedMonth'] . " " . $currentData['year']; ?></h4>
           </div>
         </div>
       </div>
       <!-- end row -->
     </div>
 
-    <!-- Test -->
+    <a href="/scraper"><button class="main-btn submit-btn mb-30">Input data harga sembako hari ini</button></a>
 
-    <?php
-    // $currentMonth = date('n'); // Bulan (1-12)
-    // $currentYear = date('Y'); // Tahun (4 digit)
-    ?>
-
-    <form action="/dashboard" method="post" name="filter">
+    <form action="/dashboard" method="post">
       <div class="row">
         <div class="col-xl-3 col-lg-4 col-sm-6">
           <div class="select-style-1">
             <div class="select-position select-sm">
               <select class="light-bg" name="month">
                 <?php for ($i = 1; $i <= 12; $i++) : ?>
-                  <option value="<?= $i ?>" <?= $i == $month ? 'selected' : '' ?>>
+                  <option value="<?= $i ?>" <?= $i == $currentData['month'] ? 'selected' : '' ?>>
                     <?= date('F', mktime(0, 0, 0, $i, 1)) ?>
                   </option>
                 <?php endfor; ?>
@@ -45,7 +40,7 @@
             <div class="select-position select-sm">
               <select class="light-bg w-100" name="year">
                 <?php for ($i = 2021; $i <= 2024; $i++) : ?>
-                  <option value="<?= $i ?>" <?= $i == $year ? 'selected' : '' ?>>
+                  <option value="<?= $i ?>" <?= $i == $currentData['year'] ? 'selected' : '' ?>>
                     <?= $i ?>
                   </option>
                 <?php endfor; ?>
@@ -85,9 +80,9 @@
           </div>
           <div class="content">
             <h6 class="mb-10">Harga Terendah</h6>
-            <h3 class="text-bold mb-10">Rp<?= number_format($lowestPrice, 0, ',', '.');; ?></h3>
+            <h3 class="text-bold mb-10">Rp<?= number_format($currentData['lowestPrice'], 0, ',', '.');; ?></h3>
             <p class="text-sm text">
-              <?php echo $lowestPriceDate . " " . $detailedMonth . " " . $year ?>
+              <?php echo $currentData['lowestPriceDate'] . " " . $currentData['detailedMonth'] . " " . $currentData['year'] ?>
             </p>
           </div>
         </div>
@@ -101,9 +96,9 @@
           </div>
           <div class="content">
             <h6 class="mb-10">Harga Tertinggi</h6>
-            <h3 class="text-bold mb-10">Rp<?= number_format($highestPrice, 0, ',', '.');; ?></h3>
+            <h3 class="text-bold mb-10">Rp<?= number_format($currentData['highestPrice'], 0, ',', '.');; ?></h3>
             <p class="text-sm text">
-              <?php echo $highestPriceDate . " " . $detailedMonth . " " . $year ?>
+              <?php echo $currentData['highestPriceDate'] . " " . $currentData['detailedMonth'] . " " . $currentData['year'] ?>
             </p>
           </div>
         </div>
@@ -117,9 +112,9 @@
           </div>
           <div class="content">
             <h6 class="mb-10">Harga Rata-rata</h6>
-            <h3 class="text-bold mb-10">Rp<?= number_format($averagePrice, 0, ',', '.'); ?></h3>
-            <p class="text-sm text-danger">
-              <i class="lni lni-arrow-down"></i> -2.00%
+            <h3 class="text-bold mb-10">Rp<?= number_format($currentData['averagePrice'], 0, ',', '.'); ?></h3>
+            <p class="text-sm <?= ($percentageOfPriceChanges > 0) ? 'text-success' : 'text-danger'; ?>">
+              <i class="lni <?= ($percentageOfPriceChanges > 0) ? 'lni-arrow-up' : 'lni-arrow-down'; ?>"></i> <?= number_format($percentageOfPriceChanges, 2); ?>% dibanding bulan lalu
             </p>
           </div>
         </div>
@@ -133,7 +128,7 @@
         <div class="card-style mb-30">
           <div class="title d-flex flex-wrap justify-content-between">
             <div class="left">
-              <h6 class="text-medium mb-20">Perkembangan Harga</h6>
+              <h6 class="text-medium mb-30">Perkembangan Harga</h6>
             </div>
           </div>
           <!-- End Title -->
@@ -164,34 +159,60 @@
 
 <script>
   // =========== chart one start
-  var labels = [
-    <?php foreach ($days as $day) : ?> "<?php echo $day; ?>",
+  var currentLabels = [
+    <?php foreach ($currentData['days'] as $day) : ?> "<?php echo $day; ?>",
     <?php endforeach; ?>
   ];
-  var prices = [
-    <?php foreach ($prices as $price) : ?> "<?php echo $price; ?>",
+
+  var currentPrices = [
+    <?php foreach ($currentData['prices'] as $price) : ?> "<?php echo $price; ?>",
     <?php endforeach; ?>
   ];
+
+  var comparedLabels = [
+    <?php foreach ($comparedData['days'] as $day) : ?> "<?php echo $day; ?>",
+    <?php endforeach; ?>
+  ];
+
+  var comparedPrices = [
+    <?php foreach ($comparedData['prices'] as $price) : ?> "<?php echo $price; ?>",
+    <?php endforeach; ?>
+  ];
+
   const ctx1 = document.getElementById("Chart1").getContext("2d");
   const chart1 = new Chart(ctx1, {
     type: "line",
     data: {
-      labels: labels,
+      labels: currentLabels,
       datasets: [{
-        label: "",
+        label: "<?php echo $currentData['detailedMonth'] ?>",
         backgroundColor: "transparent",
-        borderColor: "#fff",
-        data: prices,
+        borderColor: "#EEEEEE",
+        data: currentPrices,
         pointBackgroundColor: "transparent",
-        pointHoverBackgroundColor: "#365CF5",
+        pointHoverBackgroundColor: "#000",
         pointBorderColor: "transparent",
-        pointHoverBorderColor: "#fff",
+        pointHoverBorderColor: "#eee",
         pointHoverBorderWidth: 5,
         borderWidth: 5,
         pointRadius: 8,
         pointHoverRadius: 8,
         cubicInterpolationMode: "monotone", // Add this line for curved line
-      }, ],
+      }, {
+        label: "<?php echo $comparedData['detailedMonth'] ?>",
+        backgroundColor: "transparent",
+        borderColor: "#76ABAE",
+        data: comparedPrices,
+        pointBackgroundColor: "transparent",
+        pointHoverBackgroundColor: "#fff",
+        pointBorderColor: "transparent",
+        pointHoverBorderColor: "#76ABAE",
+        pointHoverBorderWidth: 5,
+        borderWidth: 5,
+        pointRadius: 8,
+        pointHoverRadius: 8,
+        cubicInterpolationMode: "monotone", // Add this line for curved line
+      }],
     },
     options: {
       plugins: {
@@ -234,7 +255,13 @@
           },
         },
         legend: {
-          display: false,
+          display: true,
+          position: 'top',
+          labels: {
+            color: "#fff",
+            padding: 40,
+            boxWidth: 2,
+          },
         },
       },
       responsive: true,
@@ -253,6 +280,7 @@
             padding: 35,
             max: 1200,
             min: 500,
+            color: "#fff",
           },
         },
         x: {
@@ -263,6 +291,7 @@
           },
           ticks: {
             padding: 20,
+            color: "#fff",
           },
         },
       },

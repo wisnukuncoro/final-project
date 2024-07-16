@@ -157,6 +157,7 @@
 <script src="js/world-merc.js"></script>
 <script src="js/polyfill.js"></script>
 <script src="js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 
 <script>
   // =========== chart one start

@@ -10,6 +10,7 @@ Proyek ini adalah implementasi Recurrent Neural Network (RNN) dengan menggunakan
 
 Pandas -> pip install pandas
 Sqlalchemy -> pip install sqlalchemy
+pip install beautifulsoup4 requests
 
 ## Setup
 

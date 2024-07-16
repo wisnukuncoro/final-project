@@ -17,4 +17,12 @@ class DashboardModels extends Model
       ->orderBy('tanggal', 'ASC')
       ->findAll();
   }
+
+  public function getAvailableMonthYear()
+  {
+    $builder = $this->db->table($this->table);
+    $builder->select('DISTINCT MONTH(tanggal) AS month, YEAR(tanggal) AS year');
+    $query = $builder->get();
+    return $query->getResultArray();
+  }
 }
