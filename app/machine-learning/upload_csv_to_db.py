@@ -2,7 +2,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 # Baca file CSV
-df = pd.read_csv('app/machine-learning/dataset.csv', parse_dates=['Tanggal'])
+df = pd.read_csv('app/machine-learning/dataset_interpolate.csv', parse_dates=['Tanggal'])
 
 # Koneksi ke database MySQL
 username = 'root' 

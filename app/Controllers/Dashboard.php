@@ -24,7 +24,7 @@ class Dashboard extends BaseController
     $currentData = $this->getData($month, $year, $foodType);
     $comparedData = $this->getData($comparedMonth, $comparedYear, $foodType);
 
-    $percentageOfPriceChanges = ($currentData['averagePrice'] - $comparedData['averagePrice']) / $currentData['averagePrice'] * 100;
+    $percentageOfPriceChanges = ($currentData['averagePrice'] - $comparedData['averagePrice']) / $comparedData['averagePrice'] * 100;
 
     $data = [
       'currentData' => $currentData,
@@ -41,7 +41,7 @@ class Dashboard extends BaseController
   {
     $month = $this->request->getPost('month');
     $year = $this->request->getPost('year');
-    $foodType = $this->request->getPost('foodType');
+    $foodType = strval($this->request->getPost('foodType'));
 
     if ($month == 1) {
       $comparedMonth = 12;
@@ -54,7 +54,7 @@ class Dashboard extends BaseController
     $currentData = $this->getData($month, $year, $foodType);
     $comparedData = $this->getData($comparedMonth, $comparedYear, $foodType);
 
-    $percentageOfPriceChanges = ($currentData['averagePrice'] - $comparedData['averagePrice']) / $currentData['averagePrice'] * 100;
+    $percentageOfPriceChanges = ($currentData['averagePrice'] - $comparedData['averagePrice']) / $comparedData['averagePrice'] * 100;
 
     $data = [
       'title' => "Dashboard Harga " . ucwords(str_replace('_', ' ', $foodType)),
@@ -103,12 +103,8 @@ class Dashboard extends BaseController
     $days = [];
 
     foreach ($result as $item) {
-      if ($item['prices'] == 0) {
-        continue;
-      } else {
-        $days[] = $item['days'];
-        $prices[] = $item['prices'];
-      }
+      $days[] = $item['days'];
+      $prices[] = $item['prices'];
     }
 
     $lowestPrice = min($prices);

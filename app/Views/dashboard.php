@@ -2,6 +2,8 @@
 
 <?= $this->section('content'); ?>
 
+<?php $currentDates = date('M Y'); ?>
+
 <!-- ========== section start ========== -->
 <section class="section">
   <div class="container-fluid">
@@ -20,6 +22,10 @@
 
     <a href="/scraper"><button class="main-btn submit-btn mb-30">Input data harga sembako hari ini</button></a>
 
+    <!--  -->
+
+    <p class="mb-10">Data yang tersedia: </p>
+    <p class="mb-20">May 2021 - <?= $currentDates; ?></p>
     <form action="/dashboard" method="post">
       <div class="row">
         <div class="col-xl-3 col-lg-4 col-sm-6">
@@ -27,7 +33,7 @@
             <div class="select-position select-sm">
               <select class="light-bg" name="month">
                 <?php for ($i = 1; $i <= 12; $i++) : ?>
-                  <option value="<?= $i ?>" <?= $i == $currentData['month'] ? 'selected' : '' ?>>
+                  <option value="<?= $i ?>" <?= $i == $currentData['month'] ? 'selected' : '' ?> >
                     <?= date('F', mktime(0, 0, 0, $i, 1)) ?>
                   </option>
                 <?php endfor; ?>
@@ -40,7 +46,7 @@
             <div class="select-position select-sm">
               <select class="light-bg w-100" name="year">
                 <?php for ($i = 2021; $i <= 2024; $i++) : ?>
-                  <option value="<?= $i ?>" <?= $i == $currentData['year'] ? 'selected' : '' ?>>
+                  <option value="<?= $i ?>" <?= $i == $currentData['year'] ? 'selected' : '' ?> >
                     <?= $i ?>
                   </option>
                 <?php endfor; ?>
@@ -80,7 +86,7 @@
           </div>
           <div class="content">
             <h6 class="mb-10">Harga Terendah</h6>
-            <h3 class="text-bold mb-10">Rp<?= number_format($currentData['lowestPrice'], 0, ',', '.');; ?></h3>
+            <h3 class="text-bold mb-10">Rp<?= number_format($currentData['lowestPrice'], 0, ',', '.'); ?></h3>
             <p class="text-sm text">
               <?php echo $currentData['lowestPriceDate'] . " " . $currentData['detailedMonth'] . " " . $currentData['year'] ?>
             </p>
@@ -96,7 +102,7 @@
           </div>
           <div class="content">
             <h6 class="mb-10">Harga Tertinggi</h6>
-            <h3 class="text-bold mb-10">Rp<?= number_format($currentData['highestPrice'], 0, ',', '.');; ?></h3>
+            <h3 class="text-bold mb-10">Rp<?= number_format($currentData['highestPrice'], 0, ',', '.'); ?></h3>
             <p class="text-sm text">
               <?php echo $currentData['highestPriceDate'] . " " . $currentData['detailedMonth'] . " " . $currentData['year'] ?>
             </p>
@@ -157,20 +163,50 @@
 <script src="js/polyfill.js"></script>
 <script src="js/main.js"></script>
 
+<!-- script modals -->
+<script>
+  // Get the modal
+  var modal = document.getElementById("errorModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("showModal");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks the button, open the modal 
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
 <script>
   // =========== chart one start
-  var currentLabels = [
-    <?php foreach ($currentData['days'] as $day) : ?> "<?php echo $day; ?>",
+  <?php if (count($currentData['days']) > count($comparedData['days'])) {
+    $labels = $currentData['days'];
+  } else {
+    $labels = $comparedData['days'];
+  }; ?>
+
+  var labels = [
+    <?php foreach ($labels as $label) : ?> "<?php echo $label; ?>",
     <?php endforeach; ?>
   ];
 
   var currentPrices = [
     <?php foreach ($currentData['prices'] as $price) : ?> "<?php echo $price; ?>",
-    <?php endforeach; ?>
-  ];
-
-  var comparedLabels = [
-    <?php foreach ($comparedData['days'] as $day) : ?> "<?php echo $day; ?>",
     <?php endforeach; ?>
   ];
 
@@ -183,7 +219,7 @@
   const chart1 = new Chart(ctx1, {
     type: "line",
     data: {
-      labels: currentLabels,
+      labels: labels,
       datasets: [{
         label: "<?php echo $currentData['detailedMonth'] ?>",
         backgroundColor: "transparent",
