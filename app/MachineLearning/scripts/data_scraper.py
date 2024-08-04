@@ -10,7 +10,9 @@ import json
 
 options = Options()
 options.add_argument("--headless")
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+# driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
+driver = webdriver.Chrome(options=options)
 
 url = 'https://panelharga.badanpangan.go.id/harga-eceran'
 

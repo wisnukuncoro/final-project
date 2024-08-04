@@ -9,7 +9,7 @@ class Dashboard extends BaseController
 {
   public function index()
   {
-    $month = date('n');
+    $month = date('m');
     $year = date('Y');
     $foodType = "bawang_merah";
 
