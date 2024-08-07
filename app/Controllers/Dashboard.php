@@ -12,6 +12,15 @@ class Dashboard extends BaseController
     $month = date('m');
     $year = date('Y');
     $foodType = "bawang_merah";
+    $availableMonthYear = $this->getAvailableMonthYear();
+
+    foreach ($availableMonthYear as $items) {
+      foreach ($items as $item) {
+        $availableDates[] = $item;
+      }
+    }
+
+    array_splice($availableDates, 0, 2);
 
     if ($month == 1) {
       $comparedMonth = 12;
@@ -32,6 +41,7 @@ class Dashboard extends BaseController
       'title' => "Dashboard Harga " . ucwords(str_replace('_', ' ', $foodType)),
       'foodType' => $foodType,
       'percentageOfPriceChanges' => $percentageOfPriceChanges,
+      'availableDates' => $availableDates,
     ];
 
     return view('dashboard', $data);
@@ -42,6 +52,15 @@ class Dashboard extends BaseController
     $month = $this->request->getPost('month');
     $year = $this->request->getPost('year');
     $foodType = strval($this->request->getPost('foodType'));
+    $availableMonthYear = $this->getAvailableMonthYear();
+
+    foreach ($availableMonthYear as $items) {
+      foreach ($items as $item) {
+        $availableDates[] = $item;
+      }
+    }
+
+    array_splice($availableDates, 0, 2);
 
     if ($month == 1) {
       $comparedMonth = 12;
@@ -62,6 +81,7 @@ class Dashboard extends BaseController
       'comparedData' => $comparedData,
       'percentageOfPriceChanges' => $percentageOfPriceChanges,
       'foodType' => $foodType,
+      'availableDates' => $availableDates,
     ];
 
     return view('dashboard', $data);
@@ -73,17 +93,12 @@ class Dashboard extends BaseController
 
     $result = $dashboardModels->getAvailableMonthYear();
 
-    $month = [];
-    $year = [];
-
     foreach ($result as $item) {
-      $month[] = $item['month'];
-      $year[] = $item['year'];
+      $dates[] = $item['year'] . "-" . $item['month']; 
     }
 
     $data = [
-      'month' => $month,
-      'year' => $year
+      'dates' => $dates,
     ];
 
     return $data;
@@ -94,10 +109,6 @@ class Dashboard extends BaseController
     $dashboardModels = new DashboardModels();
 
     $result = $dashboardModels->getPricesByMonth($month, $year, $foodType);
-
-    // if (empty($result)) {
-    //   throw new \Exception("Data not found for the given criteria.");
-    // }
 
     $prices = [];
     $days = [];

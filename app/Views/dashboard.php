@@ -26,14 +26,14 @@
 
     <p class="mb-10">Data yang tersedia: </p>
     <p class="mb-20">May 2021 - <?= $currentDates; ?></p>
-    <form action="/dashboard" method="post">
+    <form action="/dashboard" method="post" id="MyForm">
       <div class="row">
         <div class="col-xl-3 col-lg-4 col-sm-6">
           <div class="select-style-1">
             <div class="select-position select-sm">
-              <select class="light-bg" name="month">
+              <select class="light-bg" name="month" id="month">
                 <?php for ($i = 1; $i <= 12; $i++) : ?>
-                  <option value="<?= $i ?>" <?= $i == $currentData['month'] ? 'selected' : '' ?> >
+                  <option value="<?= $i ?>" <?= $i == $currentData['month'] ? 'selected' : '' ?>>
                     <?= date('F', mktime(0, 0, 0, $i, 1)) ?>
                   </option>
                 <?php endfor; ?>
@@ -44,9 +44,9 @@
         <div class="col-xl-3 col-lg-4 col-sm-6">
           <div class="select-style-1">
             <div class="select-position select-sm">
-              <select class="light-bg w-100" name="year">
+              <select class="light-bg w-100" name="year" id="year">
                 <?php for ($i = 2021; $i <= 2024; $i++) : ?>
-                  <option value="<?= $i ?>" <?= $i == $currentData['year'] ? 'selected' : '' ?> >
+                  <option value="<?= $i ?>" <?= $i == $currentData['year'] ? 'selected' : '' ?>>
                     <?= $i ?>
                   </option>
                 <?php endfor; ?>
@@ -72,7 +72,7 @@
           </div>
         </div>
         <div class="col-xl-3 col-lg-4 col-sm-6">
-          <button type="submit" class="main-btn submit-btn">Submit</button>
+          <button type="submit" class="main-btn submit-btn" value="Submit">Submit</button>
         </div>
       </div>
     </form>
@@ -152,6 +152,54 @@
 </section>
 <!-- ========== section end ========== -->
 
+<!-- ModalTwo start -->
+<div class="warning-modal">
+  <div class="modal fade" id="ModalTwo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content card-style warning-card text-center">
+        <div class="modal-body">
+          <div class="icon text-danger mb-20">
+            <i class="lni lni-warning"></i>
+          </div>
+          <div class="content mb-30">
+            <h2 class="mb-15">Warning!</h2>
+            <p class="text-sm text-medium">
+              An error has occurred while operating an error report
+            </p>
+          </div>
+          <div class="action d-flex flex-wrap justify-content-center">
+            <button data-bs-dismiss="modal" class="main-btn btn-sm danger-btn rounded-full btn-hover m-1">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ModalTwo End -->
+
+<!-- ModalFive start -->
+
+<div class="modal fade" id="ModalFive" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        An error has occurred while operating an error report.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ModalFive End -->
+
 <!-- ========= All Javascript files linkup ======== -->
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/Chart.min.js"></script>
@@ -163,33 +211,29 @@
 <script src="js/polyfill.js"></script>
 <script src="js/main.js"></script>
 
-<!-- script modals -->
 <script>
-  // Get the modal
-  var modal = document.getElementById("errorModal");
+  document.addEventListener('DOMContentLoaded', function() {
+    const availableDates = <?php echo json_encode($availableDates); ?>;
+    const modalElement = document.getElementById('ModalFive');
+    const modal = new bootstrap.Modal(modalElement);
 
-  // Get the button that opens the modal
-  var btn = document.getElementById("showModal");
+    document.getElementById('MyForm').addEventListener('submit', function(event) {
+      // Mencegah form submit
+      event.preventDefault();
 
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
+      // Menangkap nilai input
+      let year = document.getElementById('year').value;
+      let month = document.getElementById('month').value;
 
-  // When the user clicks the button, open the modal 
-  btn.onclick = function() {
-    modal.style.display = "block";
-  }
+      let monthYear = year + "-" + month;
 
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
+      if (!availableDates.includes(monthYear)) {
+        alert('Bulan dan Tahun Yang Anda Pilih Tidak Valid, Lihat Pada Informasi Data Yang Tersedia!')
+      } else {
+        this.submit();
+      }
+    });
+  });
 </script>
 
 <script>

@@ -18,7 +18,7 @@ class Scraper extends BaseController
     $scraperModels->getStatus($date);
 
     // shell_exec('')
-    $output = shell_exec(ROOTPATH . '.venv/Scripts/activate && python ' . APPPATH . 'machine-learning/data_scraper.py');
+    $output = shell_exec(ROOTPATH . '.venv/Scripts/activate && python ' . APPPATH . 'MachineLearning/scripts/data_scraper.py');
 
     $data = json_decode($output, true);
 

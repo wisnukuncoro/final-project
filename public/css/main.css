@@ -1752,6 +1752,11 @@ h6,
   color: #fff;
   font-size: 14px;
 }
+.table tbody td {
+  font-weight: 400;
+  color: #fff;
+  font-size: 12px;
+}
 .table td.min-width {
   padding: 5px;
 }
@@ -1763,13 +1768,13 @@ h6,
 .table td p {
   font-size: 14px;
   line-height: 1.5;
-  color: #5d657b;
+  color: #fff;
 }
 .table td p a {
   color: inherit;
 }
 .table td p a:hover {
-  color: #313d4a;
+  color: #fff;
 }
 .table .lead-info {
   min-width: 200px;

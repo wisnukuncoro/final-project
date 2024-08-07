@@ -10,7 +10,7 @@
       <div class="row align-items-center">
         <div class="col-md-6">
           <div class="title">
-            <h2>Prediksi Harga Beras</h2>
+            <h2>Prediksi Harga Bawang Merah</h2>
           </div>
         </div>
       </div>
@@ -81,9 +81,9 @@
           </div>
           <div class="content">
             <h6 class="mb-10">Harga Terendah</h6>
-            <h3 class="text-bold mb-10">Rp14.310</h3>
+            <h3 class="text-bold mb-10">Rp<?= number_format($lowestPrice, 0, ',', '.'); ?></h3>
             <p class="text-sm text">
-              1 Januari 2024
+              <?= $lowestPriceDate . " " . $month . " " . $year; ?>
             </p>
           </div>
         </div>
@@ -97,9 +97,9 @@
           </div>
           <div class="content">
             <h6 class="mb-10">Harga Tertinggi</h6>
-            <h3 class="text-bold mb-10">Rp14.950</h3>
+            <h3 class="text-bold mb-10">Rp<?= number_format($highestPrice, 0, ',', '.'); ?></h3>
             <p class="text-sm text">
-              30 Januari 2024
+              <?= $highestPriceDate . " " . $month . " " . $year; ?>
             </p>
           </div>
         </div>
@@ -113,9 +113,9 @@
           </div>
           <div class="content">
             <h6 class="mb-10">Harga Rata-rata</h6>
-            <h3 class="text-bold mb-10">Rp15.937</h3>
-            <p class="text-sm text-danger">
-              <i class="lni lni-arrow-down"></i> -2.00%
+            <h3 class="text-bold mb-10">Rp<?= number_format($averagePrice, 0, ',', '.'); ?></h3>
+            <p class="text-sm text">
+              <?= $month . " " . $year; ?>
             </p>
           </div>
         </div>
@@ -161,80 +161,71 @@
 
 <script>
   // =========== chart one start
+  <?php
+  $labels = [];
+  for ($i = 1; $i <= count($predict); $i++) {
+    $labels[] = $i;
+  }
+  ?>
+
+  var labels = [
+    <?php foreach ($labels as $label) : ?> "<?php echo $label; ?>",
+    <?php endforeach; ?>
+  ];
+
+  var currentPrices = [
+    <?php foreach ($predict as $price) : ?> "<?php echo $price; ?>",
+    <?php endforeach; ?>
+  ];
+
+  console.log(currentPrices);
+
   const ctx1 = document.getElementById("Chart1").getContext("2d");
   const chart1 = new Chart(ctx1, {
     type: "line",
     data: {
-      labels: [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14",
-        "15",
-        "16",
-        "17",
-        "18",
-        "19",
-        "20",
-        "21",
-        "22",
-        "23",
-        "24",
-        "25",
-        "26",
-        "27",
-        "28",
-        "29",
-      ],
+      labels: labels,
       datasets: [{
         label: "",
         backgroundColor: "transparent",
-        borderColor: "#365CF5",
+        borderColor: "#EEEEEE",
         data: [
-          14770,
-          14920,
-          14750,
-          15040,
-          14740,
-          15250,
-          15280,
-          15220,
-          15260,
-          15140,
-          15240,
-          15330,
-          15530,
-          15940,
-          16290,
-          16170,
-          16100,
-          16140,
-          16270,
-          16380,
-          16160,
-          16450,
-          16130,
-          16350,
-          16490,
-          16320,
-          16560,
-          16360,
-          16710,
+          40767,
+          39157,
+          41026,
+          39964,
+          38221,
+          38223,
+          41505,
+          38002,
+          39157,
+          39743,
+          39108,
+          38993,
+          39201,
+          41057,
+          38227,
+          38011,
+          39056,
+          38254,
+          39692,
+          41943,
+          39947,
+          38325,
+          40407,
+          40545,
+          39487,
+          39537,
+          41357,
+          41655,
+          40302,
+          38185,
+          40260,
         ],
         pointBackgroundColor: "transparent",
-        pointHoverBackgroundColor: "#365CF5",
+        pointHoverBackgroundColor: "#000",
         pointBorderColor: "transparent",
-        pointHoverBorderColor: "#fff",
+        pointHoverBorderColor: "#eee",
         pointHoverBorderWidth: 5,
         borderWidth: 5,
         pointRadius: 8,
@@ -318,362 +309,6 @@
     },
   });
   // =========== chart one end
-
-  // =========== chart two start
-  const ctx2 = document.getElementById("Chart2").getContext("2d");
-  const chart2 = new Chart(ctx2, {
-    type: "bar",
-    data: {
-      labels: [
-        "Jan",
-        "Fab",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
-      datasets: [{
-        label: "",
-        backgroundColor: "#365CF5",
-        borderRadius: 30,
-        barThickness: 6,
-        maxBarThickness: 8,
-        data: [
-          600, 700, 1000, 700, 650, 800, 690, 740, 720, 1120, 876, 900,
-        ],
-      }, ],
-    },
-    options: {
-      plugins: {
-        tooltip: {
-          callbacks: {
-            titleColor: function(context) {
-              return "#8F92A1";
-            },
-            label: function(context) {
-              let label = context.dataset.label || "";
-
-              if (label) {
-                label += ": ";
-              }
-              label += context.parsed.y;
-              return label;
-            },
-          },
-          backgroundColor: "#F3F6F8",
-          titleAlign: "center",
-          bodyAlign: "center",
-          titleFont: {
-            size: 12,
-            weight: "bold",
-            color: "#8F92A1",
-          },
-          bodyFont: {
-            size: 16,
-            weight: "bold",
-            color: "#171717",
-          },
-          displayColors: false,
-          padding: {
-            x: 30,
-            y: 10,
-          },
-        },
-      },
-      legend: {
-        display: false,
-      },
-      legend: {
-        display: false,
-      },
-      layout: {
-        padding: {
-          top: 15,
-          right: 15,
-          bottom: 15,
-          left: 15,
-        },
-      },
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          grid: {
-            display: false,
-            drawTicks: false,
-            drawBorder: false,
-          },
-          ticks: {
-            padding: 35,
-            max: 1200,
-            min: 0,
-          },
-        },
-        x: {
-          grid: {
-            display: false,
-            drawBorder: false,
-            color: "rgba(143, 146, 161, .1)",
-            drawTicks: false,
-            zeroLineColor: "rgba(143, 146, 161, .1)",
-          },
-          ticks: {
-            padding: 20,
-          },
-        },
-      },
-      plugins: {
-        legend: {
-          display: false,
-        },
-        title: {
-          display: false,
-        },
-      },
-    },
-  });
-  // =========== chart two end
-
-  // =========== chart three start
-  const ctx3 = document.getElementById("Chart3").getContext("2d");
-  const chart3 = new Chart(ctx3, {
-    type: "line",
-    data: {
-      labels: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
-      datasets: [{
-          label: "Revenue",
-          backgroundColor: "transparent",
-          borderColor: "#365CF5",
-          data: [80, 120, 110, 100, 130, 150, 115, 145, 140, 130, 160, 210],
-          pointBackgroundColor: "transparent",
-          pointHoverBackgroundColor: "#365CF5",
-          pointBorderColor: "transparent",
-          pointHoverBorderColor: "#365CF5",
-          pointHoverBorderWidth: 3,
-          pointBorderWidth: 5,
-          pointRadius: 5,
-          pointHoverRadius: 8,
-          fill: false,
-          tension: 0.4,
-        },
-        {
-          label: "Profit",
-          backgroundColor: "transparent",
-          borderColor: "#9b51e0",
-          data: [
-            120, 160, 150, 140, 165, 210, 135, 155, 170, 140, 130, 200,
-          ],
-          pointBackgroundColor: "transparent",
-          pointHoverBackgroundColor: "#9b51e0",
-          pointBorderColor: "transparent",
-          pointHoverBorderColor: "#9b51e0",
-          pointHoverBorderWidth: 3,
-          pointBorderWidth: 5,
-          pointRadius: 5,
-          pointHoverRadius: 8,
-          fill: false,
-          tension: 0.4,
-        },
-        {
-          label: "Order",
-          backgroundColor: "transparent",
-          borderColor: "#f2994a",
-          data: [180, 110, 140, 135, 100, 90, 145, 115, 100, 110, 115, 150],
-          pointBackgroundColor: "transparent",
-          pointHoverBackgroundColor: "#f2994a",
-          pointBorderColor: "transparent",
-          pointHoverBorderColor: "#f2994a",
-          pointHoverBorderWidth: 3,
-          pointBorderWidth: 5,
-          pointRadius: 5,
-          pointHoverRadius: 8,
-          fill: false,
-          tension: 0.4,
-        },
-      ],
-    },
-    options: {
-      plugins: {
-        tooltip: {
-          intersect: false,
-          backgroundColor: "#fbfbfb",
-          titleColor: "#8F92A1",
-          bodyColor: "#272727",
-          titleFont: {
-            size: 16,
-            family: "Plus Jakarta Sans",
-            weight: "400",
-          },
-          bodyFont: {
-            family: "Plus Jakarta Sans",
-            size: 16,
-          },
-          multiKeyBackground: "transparent",
-          displayColors: false,
-          padding: {
-            x: 30,
-            y: 15,
-          },
-          borderColor: "rgba(143, 146, 161, .1)",
-          borderWidth: 1,
-          enabled: true,
-        },
-        title: {
-          display: false,
-        },
-        legend: {
-          display: false,
-        },
-      },
-      layout: {
-        padding: {
-          top: 0,
-        },
-      },
-      responsive: true,
-      // maintainAspectRatio: false,
-      legend: {
-        display: false,
-      },
-      scales: {
-        y: {
-          grid: {
-            display: false,
-            drawTicks: false,
-            drawBorder: false,
-          },
-          ticks: {
-            padding: 35,
-          },
-          max: 350,
-          min: 50,
-        },
-        x: {
-          grid: {
-            drawBorder: false,
-            color: "rgba(143, 146, 161, .1)",
-            drawTicks: false,
-            zeroLineColor: "rgba(143, 146, 161, .1)",
-          },
-          ticks: {
-            padding: 20,
-          },
-        },
-      },
-    },
-  });
-  // =========== chart three end
-
-  // ================== chart four start
-  const ctx4 = document.getElementById("Chart4").getContext("2d");
-  const chart4 = new Chart(ctx4, {
-    type: "bar",
-    data: {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-      datasets: [{
-          label: "",
-          backgroundColor: "#365CF5",
-          borderColor: "transparent",
-          borderRadius: 20,
-          borderWidth: 5,
-          barThickness: 20,
-          maxBarThickness: 20,
-          data: [600, 700, 1000, 700, 650, 800],
-        },
-        {
-          label: "",
-          backgroundColor: "#d50100",
-          borderColor: "transparent",
-          borderRadius: 20,
-          borderWidth: 5,
-          barThickness: 20,
-          maxBarThickness: 20,
-          data: [690, 740, 720, 1120, 876, 900],
-        },
-      ],
-    },
-    options: {
-      plugins: {
-        tooltip: {
-          backgroundColor: "#F3F6F8",
-          titleColor: "#8F92A1",
-          titleFontSize: 12,
-          bodyColor: "#171717",
-          bodyFont: {
-            weight: "bold",
-            size: 16,
-          },
-          multiKeyBackground: "transparent",
-          displayColors: false,
-          padding: {
-            x: 30,
-            y: 10,
-          },
-          bodyAlign: "center",
-          titleAlign: "center",
-          enabled: true,
-        },
-        legend: {
-          display: false,
-        },
-      },
-      layout: {
-        padding: {
-          top: 0,
-        },
-      },
-      responsive: true,
-      // maintainAspectRatio: false,
-      title: {
-        display: false,
-      },
-      scales: {
-        y: {
-          grid: {
-            display: false,
-            drawTicks: false,
-            drawBorder: false,
-          },
-          ticks: {
-            padding: 35,
-            max: 1200,
-            min: 0,
-          },
-        },
-        x: {
-          grid: {
-            display: false,
-            drawBorder: false,
-            color: "rgba(143, 146, 161, .1)",
-            zeroLineColor: "rgba(143, 146, 161, .1)",
-          },
-          ticks: {
-            padding: 20,
-          },
-        },
-      },
-    },
-  });
-  // =========== chart four end
 </script>
 
 <?= $this->endSection(); ?>

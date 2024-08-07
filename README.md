@@ -4,20 +4,35 @@
 
 Proyek ini adalah implementasi Recurrent Neural Network (RNN) dengan menggunakan algoritma Long Short-Term Memory (LSTM) untuk memprediksi harga harian sembako. Proyek ini bertujuan untuk menghasilkan aplikasi web yang terintegrasi dengan model machine learning LSTM.
 
-## Installation & updates
+## Teknologi yang digunakan
 
-### Library yang digunakan
+- Backend: PHP w/ CodeIgniter4 Framework
+- Machine Learning: Python, TensorFlow, Flask
+- Frontend: HTML, CSS, JavaScript
+- Database: MySQL
 
-Pandas -> pip install pandas
-Sqlalchemy -> pip install sqlalchemy
-pip install beautifulsoup4 requests
+## Requirements
 
-## Setup
+- XAMPP, Laragon, atau server web lokal lainnya
+- Python 3.x
+- MySQL
 
-### On progress
+# Instalasi
 
-## Server Requirements
+- **Clone Repository:**
+  ``bash
+   git clone https://github.com/wisnukuncoro/ml-projects.git
+   cd ml-projects
 
-### On progress
+- **Membuat Virtual Environment:**
+  ``bash
+   python -m venv .venv
+   .venv\Scripts\activate
 
-[Link to Code for Modelling](machine-learning/code.ipynb)
+- **Instal Dependensi:**
+  ``bash
+   pip install -r app/MachineLearning/requirements.txt
+
+## Machine Learning Folder
+
+[Link](app/MachineLearning/)

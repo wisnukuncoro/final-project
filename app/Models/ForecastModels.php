@@ -8,13 +8,12 @@ class ForecastModels extends Model
 {
   protected $table = 'dataset';
 
-  public function getInputX( $month)
+  public function getInputX($foodType, $endDate)
   {
-    return $this->select("*")
-      ->where('MONTH(tanggal) <', $month)
-      ->where('YEAR(tanggal) = 2024')
-      ->order_by('tanggal', 'DESC') // Urutkan berdasarkan tanggal terbaru terlebih dahulu
-      ->limit(31) // Batasi jumlah baris yang diambil
+    return $this->select("$foodType AS data")
+      ->where("tanggal <= '$endDate'")
+      ->orderby("tanggal", "DESC")
+      ->limit(30)
       ->findAll();
   }
 }
