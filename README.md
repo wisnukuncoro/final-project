@@ -1,4 +1,4 @@
-# Basic Food Price Forecaster
+# Aplikasi Prediksi Harga Harian Sembako
 
 ## Deskripsi Proyek
 
@@ -20,17 +20,16 @@ Proyek ini adalah implementasi Recurrent Neural Network (RNN) dengan menggunakan
 # Instalasi
 
 - **Clone Repository:**
-  ``bash
-   git clone https://github.com/wisnukuncoro/ml-projects.git
-   cd ml-projects
+  ```bash
+   git clone https://github.com/wisnukuncoro/final-project.git
 
 - **Membuat Virtual Environment:**
-  ``bash
+  ```bash
    python -m venv .venv
    .venv\Scripts\activate
 
 - **Instal Dependensi:**
-  ``bash
+  ```bash
    pip install -r app/MachineLearning/requirements.txt
 
 ## Machine Learning Folder
