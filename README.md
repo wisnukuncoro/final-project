@@ -17,7 +17,7 @@ Proyek ini adalah implementasi Recurrent Neural Network (RNN) dengan menggunakan
 - Python 3.x
 - MySQL
 
-# Instalasi
+## Instalasi
 
 - **Clone Repository:**
   ```bash

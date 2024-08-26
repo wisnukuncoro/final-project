@@ -10,25 +10,26 @@
     <!-- ========== title-wrapper start ========== -->
     <div class="title-wrapper pt-30">
       <div class="row align-items-center">
-        <div class="col-md-10">
+        <div class="col-md-10 col-sm-12">
           <div class="title">
             <h1><?= $title; ?></h1>
             <h4 class="mt-15"><?= $currentData['detailedMonth'] . " " . $currentData['year']; ?></h4>
+          </div>
+          <a href="/scraper"><button id="scrapeData" class="main-btn dark-btn rounded-md btn-hover mb-30 p-3">Input data harga sembako hari ini</button></a>
+          <div class="progress mb-30" style="display: none;">
+            <div id="progressBar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
       </div>
       <!-- end row -->
     </div>
-
-    <a href="/scraper"><button class="main-btn submit-btn mb-30">Input data harga sembako hari ini</button></a>
-
     <!--  -->
 
-    <p class="mb-10">Data yang tersedia: </p>
-    <p class="mb-20">May 2021 - <?= $currentDates; ?></p>
+    <h6 class="mb-10">Data yang tersedia: </h6>
+    <h6 class="mb-20">May 2021 - <?= $currentDates; ?></h6>
     <form action="/dashboard" method="post" id="MyForm">
       <div class="row">
-        <div class="col-xl-3 col-lg-4 col-sm-6">
+        <div class="col-xl-3 col-lg-3 col-sm-12">
           <div class="select-style-1">
             <div class="select-position select-sm">
               <select class="light-bg" name="month" id="month">
@@ -41,7 +42,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-lg-4 col-sm-6">
+        <div class="col-xl-3 col-lg-3 col-sm-12">
           <div class="select-style-1">
             <div class="select-position select-sm">
               <select class="light-bg w-100" name="year" id="year">
@@ -54,7 +55,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-lg-4 col-sm-6">
+        <div class="col-xl-3 col-lg-3 col-sm-12">
           <div class="select-style-1">
             <div class="select-position select-sm">
               <select class="light-bg w-100" name="foodType">
@@ -71,8 +72,8 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-lg-4 col-sm-6">
-          <button type="submit" class="main-btn submit-btn" value="Submit">Submit</button>
+        <div class="col-xl-3 col-lg-3 col-sm-6">
+          <button type="submit" class="main-btn dark-btn rounded-md btn-hover p-2" value="Submit">Submit</button>
         </div>
       </div>
     </form>
@@ -154,21 +155,21 @@
 
 <!-- ModalTwo start -->
 <div class="warning-modal">
-  <div class="modal fade" id="ModalTwo" tabindex="-1" aria-hidden="true">
+  <div class="modal fade" id="ModalOne" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content card-style warning-card text-center">
+      <div class="modal-content card-style-1 warning-card text-center">
         <div class="modal-body">
           <div class="icon text-danger mb-20">
             <i class="lni lni-warning"></i>
           </div>
           <div class="content mb-30">
-            <h2 class="mb-15">Warning!</h2>
+            <h2 class="mb-15">Error!</h2>
             <p class="text-sm text-medium">
-              An error has occurred while operating an error report
+              Bulan dan Tahun Yang Anda Pilih Tidak Valid, Lihat Pada Informasi Data Yang Tersedia!
             </p>
           </div>
           <div class="action d-flex flex-wrap justify-content-center">
-            <button data-bs-dismiss="modal" class="main-btn btn-sm danger-btn rounded-full btn-hover m-1">
+            <button data-bs-dismiss="modal" class="main-btn btn-sm dark-btn rounded-full btn-hover m-1">
               Close
             </button>
           </div>
@@ -179,42 +180,91 @@
 </div>
 <!-- ModalTwo End -->
 
-<!-- ModalFive start -->
-
-<div class="modal fade" id="ModalFive" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        An error has occurred while operating an error report.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<!-- Modal for error -->
+<div class="error-modal">
+  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content card-style-1 warning-card text-center">
+        <div class="modal-body">
+          <div class="icon text-danger mb-20">
+            <i class="lni lni-warning"></i>
+          </div>
+          <div class="content mb-30">
+            <h2 class="title mb-15">
+              <!-- title appears -->
+            </h2>
+            <p class="message text-sm text-medium">
+              <!-- message appears -->
+            </p>
+          </div>
+          <div class="action d-flex flex-wrap justify-content-center">
+            <button data-bs-dismiss="modal" class="main-btn btn-sm dark-btn rounded-full btn-hover m-1">
+              Close
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ModalFive End -->
-
 <!-- ========= All Javascript files linkup ======== -->
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/Chart.min.js"></script>
-<script src="js/dynamic-pie-chart.js"></script>
-<script src="js/moment.min.js"></script>
-<script src="js/fullcalendar.js"></script>
-<script src="js/jvectormap.min.js"></script>
-<script src="js/world-merc.js"></script>
-<script src="js/polyfill.js"></script>
-<script src="js/main.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/Chart.min.js"></script>
+<script src="/js/dynamic-pie-chart.js"></script>
+<script src="/js/moment.min.js"></script>
+<script src="/js/fullcalendar.js"></script>
+<script src="/js/jvectormap.min.js"></script>
+<script src="/js/world-merc.js"></script>
+<script src="/js/polyfill.js"></script>
+<script src="/js/main.js"></script>
+
+<script>
+  document.getElementById('scrapeData').addEventListener('click', function() {
+    var progressBar = document.getElementById('progressBar');
+    var progressContainer = document.querySelector('.progress');
+    var startTime = Date.now();
+    var duration = 20000; // 10 seconds
+
+    progressContainer.style.display = 'block';
+    progressBar.style.width = '0%';
+    progressBar.setAttribute('aria-valuenow', 0);
+
+    function updateProgress() {
+      var elapsedTime = Date.now() - startTime;
+      var progress = Math.min((elapsedTime / duration) * 100, 100);
+      progressBar.style.width = progress + '%';
+      progressBar.setAttribute('aria-valuenow', progress);
+
+      if (progress < 100) {
+        requestAnimationFrame(updateProgress);
+      }
+    }
+
+    updateProgress();
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const modalElement = document.getElementById('errorModal');
+    const modal = new bootstrap.Modal(modalElement);
+    // Check if there is a flash message
+    <?php if (session()->getFlashdata('message')): ?>
+      var message = <?= json_encode(session()->getFlashdata('message')); ?>;
+      var type = <?= json_encode(session()->getFlashdata('type')); ?>;
+      // Set the message and show the modal
+      document.querySelector('#errorModal .modal-body .message').textContent = message;
+      document.querySelector('#errorModal .modal-body .title').textContent = type;
+      modal.show();
+    <?php endif; ?>
+  });
+</script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const availableDates = <?php echo json_encode($availableDates); ?>;
-    const modalElement = document.getElementById('ModalFive');
+    const modalElement = document.getElementById('ModalOne');
     const modal = new bootstrap.Modal(modalElement);
 
     document.getElementById('MyForm').addEventListener('submit', function(event) {
@@ -228,7 +278,7 @@
       let monthYear = year + "-" + month;
 
       if (!availableDates.includes(monthYear)) {
-        alert('Bulan dan Tahun Yang Anda Pilih Tidak Valid, Lihat Pada Informasi Data Yang Tersedia!')
+        modal.show();
       } else {
         this.submit();
       }

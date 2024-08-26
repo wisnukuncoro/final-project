@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ScraperModels;
-use CodeIgniter\HTTP\ResponseInterface;
 use DateTime;
 
 class Scraper extends BaseController
@@ -13,9 +12,18 @@ class Scraper extends BaseController
   {
     $scraperModels = new ScraperModels();
 
-    $date = date('Y-m-d 00:00:00');
+    $date = date('Y-m-26 00:00:00');
+    $hour = date('H');
 
-    $scraperModels->getStatus($date);
+    $message = $scraperModels->getStatus($date);
+    if ($message) {
+      return redirect()->to('dashboard')->with('message', $message)->with('type', 'Error!');
+    }
+
+    if($hour <= 8) {
+      $message = "Data Belum Tersedia, Tunggu Hingga Jam 15.00 WIB Untuk Input Data Harga Hari Ini!";
+      return redirect()->to('dashboard')->with('message', $message)->with('type', 'Error!');
+    }
 
     // shell_exec('')
     $output = shell_exec(ROOTPATH . '.venv/Scripts/activate && python ' . APPPATH . 'MachineLearning/scripts/data_scraper.py');
@@ -43,10 +51,14 @@ class Scraper extends BaseController
       $harga = $value[$date];
       // Menyimpan ke dalam array baru
       $foodType[$key] = $harga;
-    }    
+    }
 
     $date = DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d') . ' 00:00:00';
 
-    $scraperModels->inputDataFromScraper($date, $foodType);
+    $message = $scraperModels->inputDataFromScraper($date, $foodType);
+
+    if ($message) {
+      return redirect()->to('dashboard')->with('message', $message)->with('type', 'Pesan!');
+    }
   }
 }

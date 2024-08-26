@@ -20,7 +20,7 @@
         <div class="col-lg-12">
           <div class="card-style mb-30">
             <p class="text-sm mb-20">
-              Algoritma yang digunakan adalah Long Short-Term Memory
+              Metrik Evaluasi Pada Data Uji
             </p>
             <div class="table-wrapper table-responsive">
               <table class="table">
@@ -28,9 +28,6 @@
                   <tr>
                     <th>
                       <h6>Jenis Sembako</h6>
-                    </th>
-                    <th>
-                      <h6>Accuracy</h6>
                     </th>
                     <th>
                       <h6>Mean Squared Error (MSE)</h6>
@@ -52,20 +49,17 @@
                     <td>
                       <p>Bawang Merah</p>
                     </td>
-                    <td class="center-cols">
-                      <p>90%</p>
+                    <td>
+                      <p>0.0023</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.045</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.029</p>
                     </td>
                     <td>
-                      <p>90%</p>
-                    </td>
-                    <td>
-                      <p>90%</p>
+                      <p>0.052</p>
                     </td>
                   </tr>
                   <tr>
@@ -73,19 +67,16 @@
                       <p>Bawang Putih</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.032</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.015</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.067</p>
                     </td>
                     <td>
-                      <p>90%</p>
-                    </td>
-                    <td>
-                      <p>90%</p>
+                      <p>0.040</p>
                     </td>
                   </tr>
                   <tr>
@@ -93,19 +84,16 @@
                       <p>Cabai Merah Keriting</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.03</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.021</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.024</p>
                     </td>
                     <td>
-                      <p>90%</p>
-                    </td>
-                    <td>
-                      <p>90%</p>
+                      <p>0.053</p>
                     </td>
                   </tr>
                   <tr>
@@ -113,19 +101,16 @@
                       <p>Cabai Rawit Merah</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.042</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.024</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.031</p>
                     </td>
                     <td>
-                      <p>90%</p>
-                    </td>
-                    <td>
-                      <p>90%</p>
+                      <p>0.018</p>
                     </td>
                   </tr>
                   <tr>
@@ -133,19 +118,16 @@
                       <p>Daging Sapi</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.026</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.031</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.029%</p>
                     </td>
                     <td>
-                      <p>90%</p>
-                    </td>
-                    <td>
-                      <p>90%</p>
+                      <p>0.036</p>
                     </td>
                   </tr>
                   <tr>
@@ -153,19 +135,16 @@
                       <p>Daging Ayam</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.027</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.035</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.019</p>
                     </td>
                     <td>
-                      <p>90%</p>
-                    </td>
-                    <td>
-                      <p>90%</p>
+                      <p>0.016</p>
                     </td>
                   </tr>
                   <tr>
@@ -173,19 +152,16 @@
                       <p>Telur Ayam</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.042</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.032</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.014</p>
                     </td>
                     <td>
-                      <p>90%</p>
-                    </td>
-                    <td>
-                      <p>90%</p>
+                      <p>0.021</p>
                     </td>
                   </tr>
                   <tr>
@@ -193,19 +169,16 @@
                       <p>Beras</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.023</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.039</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.015</p>
                     </td>
                     <td>
-                      <p>90%</p>
-                    </td>
-                    <td>
-                      <p>90%</p>
+                      <p>0.014</p>
                     </td>
                   </tr>
                   <tr>
@@ -213,19 +186,16 @@
                       <p>Minyak Goreng</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.032</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.021</p>
                     </td>
                     <td>
-                      <p>90%</p>
+                      <p>0.025</p>
                     </td>
                     <td>
-                      <p>90%</p>
-                    </td>
-                    <td>
-                      <p>90%</p>
+                      <p>0.019</p>
                     </td>
                   </tr>
                   <!-- end table row -->
@@ -239,7 +209,208 @@
         <!-- end col -->
       </div>
       <!-- end row -->
+    </div>
 
+    <div class="tables-wrapper">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card-style mb-30">
+            <p class="text-sm mb-20">
+              Hyperparameter yang digunakan
+            </p>
+            <div class="table-wrapper table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>
+                      <h6>Parameter</h6>
+                    </th>
+                    <th>
+                      <h6>Value</h6>
+                    </th>
+                  </tr>
+                  <!-- end table row-->
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <p>Optimizer</p>
+                    </td>
+                    <td>
+                      <p>Adam</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>Loss Function</p>
+                    </td>
+                    <td>
+                      <p>Mean Squared Error</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>Epoch</p>
+                    </td>
+                    <td>
+                      <p>20</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>Batch Size</p>
+                    </td>
+                    <td>
+                      <p>32</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>Validation Data</p>
+                    </td>
+                    <td>
+                      <p>valX, valY</p>
+                    </td>
+                  </tr>
+                  <!-- end table row -->
+                </tbody>
+              </table>
+              <!-- end table -->
+            </div>
+          </div>
+          <!-- end card -->
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+
+    <div class="tables-wrapper">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card-style mb-30">
+            <p class="text-sm mb-20">
+              Arsitektur Model
+            </p>
+            <div class="table-wrapper table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>
+                      <h6>Layer</h6>
+                    </th>
+                    <th>
+                      <h6>Tipe Layer</h6>
+                    </th>
+                    <th>
+                      <h6>Units</h6>
+                    </th>
+                    <th>
+                      <h6>Return Sequences</h6>
+                    </th>
+                    <th>
+                      <h6>Activation</h6>
+                    </th>
+                  </tr>
+                  <!-- end table row-->
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <p>Input Layer</p>
+                    </td>
+                    <td>
+                      <p>Input</p>
+                    </td>
+                    <td>
+                      <p> - </p>
+                    </td>
+                    <td>
+                      <p> - </p>
+                    </td>
+                    <td>
+                      <p> - </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>Hidden Layer 1</p>
+                    </td>
+                    <td>
+                      <p>LSTM</p>
+                    </td>
+                    <td>
+                      <p>256</p>
+                    </td>
+                    <td>
+                      <p>True</p>
+                    </td>
+                    <td>
+                      <p>Tanh (Default)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>Hidden Layer 2</p>
+                    </td>
+                    <td>
+                      <p>LSTM</p>
+                    </td>
+                    <td>
+                      <p>256</p>
+                    </td>
+                    <td>
+                      <p>True</p>
+                    </td>
+                    <td>
+                      <p>Tanh (Default)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>Hidden Layer 3</p>
+                    </td>
+                    <td>
+                      <p>LSTM</p>
+                    </td>
+                    <td>
+                      <p>256</p>
+                    </td>
+                    <td>
+                      <p>False</p>
+                    </td>
+                    <td>
+                      <p>Tanh (Default)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>Output Layer</p>
+                    </td>
+                    <td>
+                      <p>Dense</p>
+                    </td>
+                    <td>
+                      <p>1</p>
+                    </td>
+                    <td>
+                      <p> - </p>
+                    </td>
+                    <td>
+                      <p>ReLU</p>
+                    </td>
+                  </tr>
+                  <!-- end table row -->
+                </tbody>
+              </table>
+              <!-- end table -->
+            </div>
+          </div>
+          <!-- end card -->
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
     </div>
 </section>
 

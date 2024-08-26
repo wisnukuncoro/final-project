@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Datetime;
 
 class ScraperModels extends Model
 {
@@ -23,16 +24,18 @@ class ScraperModels extends Model
       'minyak_goreng' => $foodType['Minyak Goreng Kemasan Sederhana']  * 1000,
     ];
 
-    $this->db->table('dataset')->insert($data);
-
-    echo "Data Berhasil Diinput!";
+    if ($this->db->table('dataset')->insert($data)) {
+      return "Data Berhasil Diinput!";
+    }
   }
 
   public function getStatus($date)
   {
     if ($this->where('tanggal', $date)->first()) {
-      echo "Data Sudah Ada!";
-      exit;
+      $date = DateTime::createFromFormat('Y-m-d' . ' 00:00:00', $date)->format('d/m/Y');
+      return "Data Pada Tanggal " . $date . " Sudah Ada!";
     }
+
+    return null;
   }
 }

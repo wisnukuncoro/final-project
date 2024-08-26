@@ -98,7 +98,7 @@ class Forecast extends BaseController
     if (date('d') == date('d', strtotime('last day of this month'))) {
       $endDate = date('Y-m-d', strtotime('last day of this month'));
     } else {
-      $endDate = date('Y-01-31', strtotime('last day of last month'));
+      $endDate = date('Y-m-d', strtotime('last day of last month'));
     }
 
     $forecastModels = new ForecastModels();
