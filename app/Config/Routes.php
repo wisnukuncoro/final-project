@@ -10,6 +10,7 @@ $routes->get('/', 'Home::index');
 $routes->get('/dashboard', 'Dashboard::index');
 $routes->post('/dashboard', 'Dashboard::filter');
 $routes->get('/forecast', 'Forecast::index');
+$routes->post('/forecast', 'Forecast::filter');
 $routes->get('/model-information', 'ModelML::index');
 
 $routes->setAutoRoute(true);

@@ -22,13 +22,13 @@
     $currentYear = date('Y'); // Tahun (4 digit)
     ?>
 
-    <form action="/dashboard/filter" method="post" name="filter">
+    <form action="/forecast" method="post" id="MyForm">
       <div class="row">
-        <div class="col-xl-3 col-lg-4 col-sm-6">
+        <div class="col-xl-3 col-lg-3 col-sm-12">
           <div class="select-style-1">
             <div class="select-position select-sm">
-              <select class="light-bg" name="month">
-                <?php for ($i = 1; $i <= 12; $i++) : ?>
+              <select class="light-bg" name="month" id="month">
+              <?php for ($i = 1; $i <= 12; $i++) : ?>
                   <option value="<?= $i ?>" <?= $i == $currentMonth ? 'selected' : '' ?>>
                     <?= date('F', mktime(0, 0, 0, $i, 1)) ?>
                   </option>
@@ -37,11 +37,11 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-lg-4 col-sm-6">
+        <div class="col-xl-3 col-lg-3 col-sm-12">
           <div class="select-style-1">
             <div class="select-position select-sm">
-              <select class="light-bg w-100" name="year">
-                <?php for ($i = 2021; $i <= 2024; $i++) : ?>
+              <select class="light-bg w-100" name="year" id="year">
+              <?php for ($i = 2021; $i <= 2024; $i++) : ?>
                   <option value="<?= $i ?>" <?= $i == $currentYear ? 'selected' : '' ?>>
                     <?= $i ?>
                   </option>
@@ -50,31 +50,32 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-lg-4 col-sm-6">
+        <div class="col-xl-3 col-lg-3 col-sm-12">
           <div class="select-style-1">
             <div class="select-position select-sm">
               <select class="light-bg w-100" name="foodType">
-                <option value="bawang_merah" selected>Bawang Merah</option>
-                <option value="bawang_putih">Bawang Putih</option>
-                <option value="cabai_rawit_merah">Cabai Rawit Merah</option>
-                <option value="daging_sapi">Daging Sapi</option>
-                <option value="daging_ayam">Daging Ayam</option>
-                <option value="telur_ayam">Telur Ayam</option>
-                <option value="beras">Beras</option>
-                <option value="minyak_goreng">Minyak Goreng</option>
+                <option value="bawang_merah" <?= 'bawang_merah' == $foodType ? 'selected' : '' ?>>Bawang Merah</option>
+                <option value="bawang_putih" <?= 'bawang_putih' == $foodType ? 'selected' : '' ?>>Bawang Putih</option>
+                <option value="cabai_merah_keriting" <?= 'cabai_merah_keriting' == $foodType ? 'selected' : '' ?>>Cabai Merah Keriting </option>
+                <option value="cabai_rawit_merah" <?= 'cabai_rawit_merah' == $foodType ? 'selected' : '' ?>>Cabai Rawit Merah</option>
+                <option value="daging_sapi" <?= 'daging_sapi' == $foodType ? 'selected' : '' ?>>Daging Sapi</option>
+                <option value="daging_ayam" <?= 'daging_ayam' == $foodType ? 'selected' : '' ?>>Daging Ayam</option>
+                <option value="telur_ayam" <?= 'telur_ayam' == $foodType ? 'selected' : '' ?>>Telur Ayam</option>
+                <option value="beras" <?= 'beras' == $foodType ? 'selected' : '' ?>>Beras</option>
+                <option value="minyak_goreng" <?= 'minyak_goreng' == $foodType ? 'selected' : '' ?>>Minyak Goreng</option>
               </select>
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-lg-4 col-sm-6">
-          <button type="submit" class="main-btn submit-btn">Submit</button>
+        <div class="col-xl-3 col-lg-3 col-sm-12">
+          <button type="submit" class="main-btn dark-btn rounded-md btn-hover mb-30" value="Submit">Submit</button>
         </div>
       </div>
     </form>
 
     <!-- ========== title-wrapper end ========== -->
     <div class="row">
-      <div class="col-xl-4 col-lg-4 col-sm-6">
+      <div class="col-xl-4 col-lg-4 col-sm-12">
         <div class="icon-card mb-30">
           <div class="icon danger">
             <i class="lni lni-stats-down"></i>
@@ -90,7 +91,7 @@
         <!-- End Icon Cart -->
       </div>
       <!-- End Col -->
-      <div class="col-xl-4 col-lg-4 col-sm-6">
+      <div class="col-xl-4 col-lg-4 col-sm-12">
         <div class="icon-card mb-30">
           <div class="icon success">
             <i class="lni lni-stats-up"></i>
@@ -106,7 +107,7 @@
         <!-- End Icon Cart -->
       </div>
       <!-- End Col -->
-      <div class="col-xl-4 col-lg-4 col-sm-6">
+      <div class="col-xl-4 col-lg-4 col-sm-12">
         <div class="icon-card mb-30">
           <div class="icon primary">
             <i class="lni lni-pulse"></i>
@@ -129,7 +130,8 @@
         <div class="card-style mb-30">
           <div class="title d-flex flex-wrap justify-content-between">
             <div class="left">
-              <h6 class="text-medium mb-10">Perkembangan Harga</h6>
+              <h6 class="text-medium mb-10">Prediksi Perkembangan Harga</h6>
+              <p class="text-sm mb-10"><?= $month . ' ' . $year; ?></p>
             </div>
           </div>
           <!-- End Title -->
@@ -186,42 +188,10 @@
     data: {
       labels: labels,
       datasets: [{
-        label: "",
+        label: "<?php echo $month ?>",
         backgroundColor: "transparent",
         borderColor: "#EEEEEE",
-        data: [
-          40767,
-          39157,
-          41026,
-          39964,
-          38221,
-          38223,
-          41505,
-          38002,
-          39157,
-          39743,
-          39108,
-          38993,
-          39201,
-          41057,
-          38227,
-          38011,
-          39056,
-          38254,
-          39692,
-          41943,
-          39947,
-          38325,
-          40407,
-          40545,
-          39487,
-          39537,
-          41357,
-          41655,
-          40302,
-          38185,
-          40260,
-        ],
+        data: currentPrices,
         pointBackgroundColor: "transparent",
         pointHoverBackgroundColor: "#000",
         pointBorderColor: "transparent",
@@ -275,6 +245,13 @@
         },
         legend: {
           display: false,
+          position: 'top',
+          align: 'end',
+          labels: {
+            color: "#fff",
+            padding: 40,
+            boxWidth: 2,
+          },
         },
       },
       responsive: true,

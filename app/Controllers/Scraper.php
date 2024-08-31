@@ -12,7 +12,7 @@ class Scraper extends BaseController
   {
     $scraperModels = new ScraperModels();
 
-    $date = date('Y-m-26 00:00:00');
+    $date = date('Y-m-28 00:00:00');
     $hour = date('H');
 
     $message = $scraperModels->getStatus($date);
@@ -20,7 +20,7 @@ class Scraper extends BaseController
       return redirect()->to('dashboard')->with('message', $message)->with('type', 'Error!');
     }
 
-    if($hour <= 8) {
+    if($hour <= 6) {
       $message = "Data Belum Tersedia, Tunggu Hingga Jam 15.00 WIB Untuk Input Data Harga Hari Ini!";
       return redirect()->to('dashboard')->with('message', $message)->with('type', 'Error!');
     }

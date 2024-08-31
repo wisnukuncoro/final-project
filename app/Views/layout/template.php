@@ -121,6 +121,61 @@
     <!-- ========== footer end =========== -->
   </main>
   <!-- ======== main-wrapper end =========== -->
+   
+  <!-- ModalTwo start -->
+  <div class="warning-modal">
+    <div class="modal fade" id="ModalOne" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content card-style-1 warning-card text-center">
+          <div class="modal-body">
+            <div class="icon text-danger mb-20">
+              <i class="lni lni-warning"></i>
+            </div>
+            <div class="content mb-30">
+              <h2 class="mb-15">Error!</h2>
+              <p class="text-sm text-medium">
+                Bulan dan Tahun Yang Anda Pilih Tidak Valid, Lihat Pada Informasi Data Yang Tersedia!
+              </p>
+            </div>
+            <div class="action d-flex flex-wrap justify-content-center">
+              <button data-bs-dismiss="modal" class="main-btn btn-sm dark-btn rounded-full btn-hover m-1">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ModalTwo End -->
+
+  <!-- Modal for error -->
+  <div class="error-modal">
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content card-style-1 warning-card text-center">
+          <div class="modal-body">
+            <div class="icon text-danger mb-20">
+              <i class="lni lni-warning"></i>
+            </div>
+            <div class="content mb-30">
+              <h2 class="title mb-15">
+                <!-- title appears -->
+              </h2>
+              <p class="message text-sm text-medium">
+                <!-- message appears -->
+              </p>
+            </div>
+            <div class="action d-flex flex-wrap justify-content-center">
+              <button data-bs-dismiss="modal" class="main-btn btn-sm dark-btn rounded-full btn-hover m-1">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 

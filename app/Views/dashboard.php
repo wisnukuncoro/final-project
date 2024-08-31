@@ -15,7 +15,9 @@
             <h1><?= $title; ?></h1>
             <h4 class="mt-15"><?= $currentData['detailedMonth'] . " " . $currentData['year']; ?></h4>
           </div>
-          <a href="/scraper"><button id="scrapeData" class="main-btn dark-btn rounded-md btn-hover mb-30 p-3">Input data harga sembako hari ini</button></a>
+        </div>
+        <div class="col-md-10 col-sm-12">
+          <a href="/scraper"><button id="scrapeData" class="main-btn dark-btn rounded-md btn-hover mb-30 p-2">Input data harga sembako hari ini</button></a>
           <div class="progress mb-30" style="display: none;">
             <div id="progressBar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
@@ -73,7 +75,7 @@
           </div>
         </div>
         <div class="col-xl-3 col-lg-3 col-sm-6">
-          <button type="submit" class="main-btn dark-btn rounded-md btn-hover p-2" value="Submit">Submit</button>
+          <button type="submit" class="main-btn dark-btn rounded-md btn-hover p-2 mb-30" value="Submit">Submit</button>
         </div>
       </div>
     </form>
@@ -135,7 +137,7 @@
         <div class="card-style mb-30">
           <div class="title d-flex flex-wrap justify-content-between">
             <div class="left">
-              <h6 class="text-medium mb-30">Perkembangan Harga</h6>
+              <h6 class="text-medium mb-10">Perkembangan Harga</h6>
             </div>
           </div>
           <!-- End Title -->
@@ -152,61 +154,6 @@
   <!-- end container -->
 </section>
 <!-- ========== section end ========== -->
-
-<!-- ModalTwo start -->
-<div class="warning-modal">
-  <div class="modal fade" id="ModalOne" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content card-style-1 warning-card text-center">
-        <div class="modal-body">
-          <div class="icon text-danger mb-20">
-            <i class="lni lni-warning"></i>
-          </div>
-          <div class="content mb-30">
-            <h2 class="mb-15">Error!</h2>
-            <p class="text-sm text-medium">
-              Bulan dan Tahun Yang Anda Pilih Tidak Valid, Lihat Pada Informasi Data Yang Tersedia!
-            </p>
-          </div>
-          <div class="action d-flex flex-wrap justify-content-center">
-            <button data-bs-dismiss="modal" class="main-btn btn-sm dark-btn rounded-full btn-hover m-1">
-              Close
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- ModalTwo End -->
-
-<!-- Modal for error -->
-<div class="error-modal">
-  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content card-style-1 warning-card text-center">
-        <div class="modal-body">
-          <div class="icon text-danger mb-20">
-            <i class="lni lni-warning"></i>
-          </div>
-          <div class="content mb-30">
-            <h2 class="title mb-15">
-              <!-- title appears -->
-            </h2>
-            <p class="message text-sm text-medium">
-              <!-- message appears -->
-            </p>
-          </div>
-          <div class="action d-flex flex-wrap justify-content-center">
-            <button data-bs-dismiss="modal" class="main-btn btn-sm dark-btn rounded-full btn-hover m-1">
-              Close
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ========= All Javascript files linkup ======== -->
 <script src="/js/bootstrap.bundle.min.js"></script>
@@ -387,6 +334,7 @@
         legend: {
           display: true,
           position: 'top',
+          align: 'end',
           labels: {
             color: "#fff",
             padding: 40,

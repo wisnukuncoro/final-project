@@ -4,11 +4,12 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ForecastModels;
+use App\Controllers\Dashboard;
 
 class Forecast extends BaseController
 {
   public function index()
-  {
+  {        
     $predict = $this->predict();
 
     $lowestPrice = min($predict);
@@ -40,6 +41,7 @@ class Forecast extends BaseController
       'averagePrice' => $averagePrice,
       'month'=> $month,
       'year' => $year,
+      'foodType' => 'bawang_merah',
     ];
 
     return view('forecast', $data);
@@ -47,6 +49,13 @@ class Forecast extends BaseController
 
   public function predict()
   {
+    // Jalankan API Python dari file app.py
+    // $command = 'cmd /c "start /B ' . ROOTPATH . '.venv/Scripts/activate && python ' . APPPATH . 'MachineLearning/scripts/app.py';
+    // shell_exec($command);
+
+    // // Tunggu beberapa detik agar API bisa siap menerima request
+    // sleep(10);
+
     $data = $this->getInputX();
     $data_json = json_encode($data);
 
@@ -80,8 +89,6 @@ class Forecast extends BaseController
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
 
-    $response = curl_exec($ch);
-
     // Jalankan dan ambil hasil
     $result = curl_exec($ch);
     curl_close($ch);
@@ -93,7 +100,7 @@ class Forecast extends BaseController
 
   public function getInputX()
   {
-    $foodType = "bawang_putih";
+    $foodType = "bawang_merah";
 
     if (date('d') == date('d', strtotime('last day of this month'))) {
       $endDate = date('Y-m-d', strtotime('last day of this month'));
@@ -112,4 +119,43 @@ class Forecast extends BaseController
 
     return $data;
   }
+
+  // public function filter()
+  // {
+  //   $dashboardController = new Dashboard();
+    
+  //   $month = $this->request->getPost('month');
+  //   $year = $this->request->getPost('year');
+  //   $foodType = strval($this->request->getPost('foodType'));
+  //   $availableMonthYear = $dashboardController->getAvailableMonthYear();
+
+  //   foreach ($availableMonthYear as $items) {
+  //     foreach ($items as $item) {
+  //       $availableDates[] = $item;
+  //     }
+  //   }
+
+  //   array_splice($availableDates, 0, 2);
+
+  //   if ($month == 1) {
+  //     $comparedMonth = 12;
+  //     $comparedYear = $year - 1;
+  //   } else {
+  //     $comparedMonth = $month - 1;
+  //     $comparedYear = $year;
+  //   }
+
+  //   $percentageOfPriceChanges = ($currentData['averagePrice'] - $comparedData['averagePrice']) / $comparedData['averagePrice'] * 100;
+
+  //   $data = [
+  //     'title' => "Dashboard Harga " . ucwords(str_replace('_', ' ', $foodType)),
+  //     'currentData' => $currentData,
+  //     'comparedData' => $comparedData,
+  //     'percentageOfPriceChanges' => $percentageOfPriceChanges,
+  //     'foodType' => $foodType,
+  //     'availableDates' => $availableDates,
+  //   ];
+
+  //   return view('dashboard', $data);
+  // }
 }
