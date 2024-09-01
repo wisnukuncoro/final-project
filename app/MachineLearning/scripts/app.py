@@ -39,16 +39,14 @@ num_days = get_num_days()
 
 app = Flask(__name__)
 
-# Memuat model dari file
-model = tf.keras.models.load_model('app\MachineLearning\models\model_1.h5')
-
-# Memuat scaler dari file
-with open('app\MachineLearning\scalers\scaler_1.pkl', 'rb') as file:
-    scaler = pickle.load(file)
-
 @app.route('/transform', methods=['POST'])
 def transform():
-    data = request.get_json(force=True)
+    data = request.json['data']
+    scaler = request.json['n_scalers']
+        
+    # Memuat scaler dari file
+    with open(f'app\MachineLearning\scalers\scaler_{scaler}.pkl', 'rb') as file:
+      scaler = pickle.load(file)
     
     data = np.array(data)
     
@@ -61,13 +59,23 @@ def transform():
   
 @app.route('/predict', methods=['POST'])
 def predict():
-  data = request.get_json(force=True)
+  data = request.json['response']
+  model = request.json['n_models']
+  scaler = request.json['n_scalers']
+  
+  # Memuat model dari file
+  model = tf.keras.models.load_model(f'app\MachineLearning\models\model_{model}.h5')
+  
+  # Memuat scaler dari file
+  with open(f'app\MachineLearning\scalers\scaler_{scaler}.pkl', 'rb') as file:
+    scaler = pickle.load(file)
     
   input_data = np.array(data)
   
-  for i in range(num_days):
+  input_data = input_data.reshape((1,-1,1))
+  print(input_data.shape)
 
-    predictions = model.predict(input_data)
+  predictions = model.predict(input_data)
   
   original_values = scaler.inverse_transform(predictions)
   original_values = np.round(original_values.reshape(-1,))
@@ -75,4 +83,4 @@ def predict():
   return jsonify(original_values.tolist())
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)

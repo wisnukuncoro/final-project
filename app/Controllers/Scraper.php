@@ -3,19 +3,19 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\ScraperModels;
+use App\Models\DatasetModel;
 use DateTime;
 
 class Scraper extends BaseController
 {
   public function index()
   {
-    $scraperModels = new ScraperModels();
+    $datasetModel = new DatasetModel();
 
-    $date = date('Y-m-28 00:00:00');
+    $date = date('Y-m-31 00:00:00');
     $hour = date('H');
 
-    $message = $scraperModels->getStatus($date);
+    $message = $datasetModel->getStatusForInputData($date);
     if ($message) {
       return redirect()->to('dashboard')->with('message', $message)->with('type', 'Error!');
     }
@@ -55,7 +55,7 @@ class Scraper extends BaseController
 
     $date = DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d') . ' 00:00:00';
 
-    $message = $scraperModels->inputDataFromScraper($date, $foodType);
+    $message = $datasetModel->inputDataFromScraper($date, $foodType);
 
     if ($message) {
       return redirect()->to('dashboard')->with('message', $message)->with('type', 'Pesan!');

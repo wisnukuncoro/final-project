@@ -3,7 +3,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 # Bagian 2
-df = pd.read_csv('app/machine-learning/dataset_interpolate.csv', parse_dates=['Tanggal'])
+df = pd.read_csv('app/MachineLearning/data/predict_results.csv', parse_dates=['Tanggal'])
 
 # Bagian 3
 username = 'root' 
@@ -32,4 +32,4 @@ df.rename(columns=column_mapping, inplace=True)
 engine = create_engine(f'mysql+mysqlconnector://{username}:{password}@{host}/{database}')
 
 # Bagian 7
-df.to_sql('dataset', con=engine, if_exists='replace', index=False)
+df.to_sql('predict_results', con=engine, if_exists='replace', index=False)

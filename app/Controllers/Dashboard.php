@@ -3,16 +3,20 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\DashboardModels;
+use App\Models\DatasetModel;
+use App\Models\PredictResultModel;
 
 class Dashboard extends BaseController
 {
   public function index()
   {
+    $datasetModel = new DatasetModel();
+    
     $month = date('m');
     $year = date('Y');
     $foodType = "bawang_merah";
-    $availableMonthYear = $this->getAvailableMonthYear();
+
+    $availableMonthYear = $datasetModel->getAvailableMonthYear();
 
     foreach ($availableMonthYear as $items) {
       foreach ($items as $item) {
@@ -49,10 +53,12 @@ class Dashboard extends BaseController
 
   public function filter()
   {
+    $datasetModel = new DatasetModel();
+    
     $month = $this->request->getPost('month');
     $year = $this->request->getPost('year');
     $foodType = strval($this->request->getPost('foodType'));
-    $availableMonthYear = $this->getAvailableMonthYear();
+    $availableMonthYear = $datasetModel->getAvailableMonthYear();
 
     foreach ($availableMonthYear as $items) {
       foreach ($items as $item) {
@@ -87,28 +93,16 @@ class Dashboard extends BaseController
     return view('dashboard', $data);
   }
 
-  public function getAvailableMonthYear()
+  public function getData($month, $year, $foodType, $isRealData = False)
   {
-    $dashboardModels = new DashboardModels();
+    $datasetModel = new DatasetModel();
+    $predictResultModel = new PredictResultModel();
 
-    $result = $dashboardModels->getAvailableMonthYear();
-
-    foreach ($result as $item) {
-      $dates[] = $item['year'] . "-" . $item['month']; 
+    if ($isRealData == False){
+      $result = $datasetModel->getPricesByMonth($month, $year, $foodType);
+    } else {
+      $result = $predictResultModel->getPrices($month, $year, $foodType);
     }
-
-    $data = [
-      'dates' => $dates,
-    ];
-
-    return $data;
-  }
-
-  public function getData($month, $year, $foodType)
-  {
-    $dashboardModels = new DashboardModels();
-
-    $result = $dashboardModels->getPricesByMonth($month, $year, $foodType);
 
     $prices = [];
     $days = [];

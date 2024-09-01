@@ -3,51 +3,92 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\ForecastModels;
 use App\Controllers\Dashboard;
+use App\Models\DatasetModel;
 
 class Forecast extends BaseController
 {
   public function index()
-  {        
-    $predict = $this->predict();
+  {
+    $datasetModel = new DatasetModel();
+    $dashboardController = new Dashboard();
 
-    $lowestPrice = min($predict);
-    $highestPrice = max($predict);
-    $averagePrice = round(array_sum($predict)/ count($predict));
+    $month = '5';
+    $year = '2021';
+    $foodType = "bawang_merah";
 
-    $lowestPriceDateindex = array_search($lowestPrice, $predict);
-    $highestPriceDateindex = array_search($highestPrice, $predict);
+    $availableMonthYear = $datasetModel->getAvailableMonthYear();
 
-    if (date('d') == date('d', strtotime('last day of this month'))){
-      $month = date('F', strtotime('first day of next month'));
-      $year = date('Y', strtotime('first day of next month'));
-    } else {
-      $month = date('F', strtotime('first day of this month'));
-      $year = date('Y', strtotime('first day of this month'));
+    foreach ($availableMonthYear as $items) {
+      foreach ($items as $item) {
+        $availableDates[] = $item;
+      }
     }
 
-    $lowestPriceDate = $lowestPriceDateindex+1; 
-    $highestPriceDate = $highestPriceDateindex+1;
+    array_splice($availableDates, 0, 2);
 
-    $predict = array_map('strval', $predict);
+    if (date('d') == date('d', strtotime('last day of this month'))) {
+      $newMonth = date('Y-F', strtotime('first day of next month'));
+      $availableDates[] = $newMonth;
+    }
+
+    $predictData = $dashboardController->getData($month, $year, $foodType, $isRealData = True);
+    $realData = $dashboardController->getData($month, $year, $foodType);
 
     $data = [
-      'predict' => $predict,
-      'lowestPrice' => $lowestPrice,
-      'lowestPriceDate' => $lowestPriceDate,
-      'highestPrice' => $highestPrice,
-      'highestPriceDate' => $highestPriceDate,
-      'averagePrice' => $averagePrice,
-      'month'=> $month,
+      'predictData' => $predictData,
+      'realData' => $realData,
+      'month' => $month,
       'year' => $year,
-      'foodType' => 'bawang_merah',
+      'title' => "Prediksi Harga " . ucwords(str_replace('_', ' ', $foodType)),
+      'foodType' => $foodType,
+      'availableDates' => $availableDates,
     ];
 
     return view('forecast', $data);
   }
 
-  public function predict()
+  public function filter()
+  {
+    $datasetModel = new DatasetModel();
+    $dashboardController = new Dashboard();
+
+    $month = $this->request->getPost('month');
+    $year = $this->request->getPost('year');
+    $foodType = strval($this->request->getPost('foodType'));
+
+    $availableMonthYear = $datasetModel->getAvailableMonthYear();
+
+    foreach ($availableMonthYear as $items) {
+      foreach ($items as $item) {
+        $availableDates[] = $item;
+      }
+    }
+
+    array_splice($availableDates, 0, 2);
+
+    if (date('d') == date('d', strtotime('last day of this month'))) {
+      $newMonth = date('Y-F', strtotime('first day of next month'));
+      $availableDates[] = $newMonth;
+    }
+
+    $predictData = $this->predict($month, $year, $foodType);
+    $realData = $dashboardController->getData($month, $year, $foodType);
+
+    $data = [
+      'predictData' => $predictData,
+      'realData' => $realData,
+      'month' => $month,
+      'year' => $year,
+      'title' => "Prediksi Harga " . ucwords(str_replace('_', ' ', $foodType)),
+      'foodType' => $foodType,
+      'availableDates' => $availableDates,
+    ];
+
+    return view('forecast', $data);
+  }
+
+  public function predict($month, $year, $foodType)
   {
     // Jalankan API Python dari file app.py
     // $command = 'cmd /c "start /B ' . ROOTPATH . '.venv/Scripts/activate && python ' . APPPATH . 'MachineLearning/scripts/app.py';
@@ -56,7 +97,39 @@ class Forecast extends BaseController
     // // Tunggu beberapa detik agar API bisa siap menerima request
     // sleep(10);
 
-    $data = $this->getInputX();
+    if ($foodType == 'bawang_merah'){
+      $n_models = 1;
+      $n_scalers = 1;
+    } else if ($foodType == 'bawang_putih'){
+      $n_models = 2;
+      $n_scalers = 2;
+    } else if ($foodType == 'cabai_merah_keriting'){
+      $n_models = 3;
+      $n_scalers = 3;
+    } else if ($foodType == 'cabai_rawit_merah'){
+      $n_models = 4;
+      $n_scalers = 4;
+    } else if ($foodType == 'daging_sapi'){
+      $n_models = 5;
+      $n_scalers = 5;
+    } else if ($foodType == 'daging_ayam'){
+      $n_models = 6;
+      $n_scalers = 6;
+    }else if ($foodType == 'telur_ayam'){
+      $n_models = 7;
+      $n_scalers = 7;
+    } else if ($foodType == 'beras'){
+      $n_models = 8;
+      $n_scalers = 8;
+    } else {
+      $n_models = 9;
+      $n_scalers = 9;
+    } 
+
+    $data = [
+      'data' => $this->getInputX($month, $year, $foodType),
+      'n_scalers' => $n_scalers,
+    ];
     $data_json = json_encode($data);
 
     $ch = curl_init();
@@ -66,8 +139,6 @@ class Forecast extends BaseController
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
 
-    $response = curl_exec($ch);
-
     // Jalankan dan ambil hasil
     $result = curl_exec($ch);
     curl_close($ch);
@@ -76,7 +147,9 @@ class Forecast extends BaseController
 
     // Data input untuk prediksi  
     $input_data = [
-      $response
+      'response' => $response,
+      'n_models' => $n_models,
+      'n_scalers' => $n_scalers,
     ];
 
     // Prepare data for API request
@@ -93,24 +166,48 @@ class Forecast extends BaseController
     $result = curl_exec($ch);
     curl_close($ch);
 
-    $response = json_decode($result, false);
+    $prices = json_decode($result, false);
+    $n = date("t", mktime(0, 0, 0, $month, 1, $year));
 
-    return $response;
-  }
+    array_splice($prices, -(count($prices) - $n), (count($prices) - $n));
 
-  public function getInputX()
-  {
-    $foodType = "bawang_merah";
-
-    if (date('d') == date('d', strtotime('last day of this month'))) {
-      $endDate = date('Y-m-d', strtotime('last day of this month'));
-    } else {
-      $endDate = date('Y-m-d', strtotime('last day of last month'));
+    for ($i=1; $i <= $n; $i++) { 
+      $days[] = $i;
     }
 
-    $forecastModels = new ForecastModels();
+    $lowestPrice = min($prices);
+    $highestPrice = max($prices);
+    $averagePrice = round(array_sum($prices) / count($prices));
 
-    $result = $forecastModels->getInputX($foodType, $endDate);
+    $lowestPriceDateindex = array_search($lowestPrice, $prices);
+    $highestPriceDateindex = array_search($highestPrice, $prices);
+
+    $lowestPriceDate = $days[$lowestPriceDateindex];
+    $highestPriceDate = $days[$highestPriceDateindex];
+
+    $data = [
+      'prices' => $prices,
+      'lowestPrice' => $lowestPrice,
+      'lowestPriceDate' => $lowestPriceDate,
+      'highestPrice' => $highestPrice,
+      'highestPriceDate' => $highestPriceDate,
+      'averagePrice' => $averagePrice,
+      'days' => $days,
+      'month' => $month,
+      'detailedMonth' => date('F', mktime(0, 0, 0, $month, 1)),
+      'year' => $year,
+    ];
+
+    return $data;
+  }
+
+  public function getInputX($month, $year, $foodType)
+  {
+    $endDate = date("Y-m-t", mktime(0, 0, 0, $month-1, 1, $year));
+
+    $datasetModel = new datasetModel();
+
+    $result = $datasetModel->getInputForModel($foodType, $endDate);
     $result = array_reverse($result);
 
     foreach ($result as $key) {
@@ -119,43 +216,4 @@ class Forecast extends BaseController
 
     return $data;
   }
-
-  // public function filter()
-  // {
-  //   $dashboardController = new Dashboard();
-    
-  //   $month = $this->request->getPost('month');
-  //   $year = $this->request->getPost('year');
-  //   $foodType = strval($this->request->getPost('foodType'));
-  //   $availableMonthYear = $dashboardController->getAvailableMonthYear();
-
-  //   foreach ($availableMonthYear as $items) {
-  //     foreach ($items as $item) {
-  //       $availableDates[] = $item;
-  //     }
-  //   }
-
-  //   array_splice($availableDates, 0, 2);
-
-  //   if ($month == 1) {
-  //     $comparedMonth = 12;
-  //     $comparedYear = $year - 1;
-  //   } else {
-  //     $comparedMonth = $month - 1;
-  //     $comparedYear = $year;
-  //   }
-
-  //   $percentageOfPriceChanges = ($currentData['averagePrice'] - $comparedData['averagePrice']) / $comparedData['averagePrice'] * 100;
-
-  //   $data = [
-  //     'title' => "Dashboard Harga " . ucwords(str_replace('_', ' ', $foodType)),
-  //     'currentData' => $currentData,
-  //     'comparedData' => $comparedData,
-  //     'percentageOfPriceChanges' => $percentageOfPriceChanges,
-  //     'foodType' => $foodType,
-  //     'availableDates' => $availableDates,
-  //   ];
-
-  //   return view('dashboard', $data);
-  // }
 }
