@@ -130,6 +130,14 @@ p {
   color: #FFFFFF; /* Warna teks judul */
 }
 
+.card-style p {
+  color: #FFFFFF; /* Warna teks judul */
+}
+
+.card-style td p {
+  color: #FFFFFF; /* Warna teks judul */
+}
+
 .card-style .dropdown-menu {
   background: #2C3E50; /* Warna latar belakang dropdown */
   color: #FFFFFF; /* Warna teks dropdown */

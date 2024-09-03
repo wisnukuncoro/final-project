@@ -27,10 +27,8 @@ class Forecast extends BaseController
 
     array_splice($availableDates, 0, 2);
 
-    if (date('d') == date('d', strtotime('last day of this month'))) {
-      $newMonth = date('Y-F', strtotime('first day of next month'));
-      $availableDates[] = $newMonth;
-    }
+    $newMonth = date('Y-n', strtotime('first day of this month'));
+    $availableDates[] = $newMonth;
 
     $predictData = $dashboardController->getData($month, $year, $foodType, $isRealData = True);
     $realData = $dashboardController->getData($month, $year, $foodType);
@@ -43,6 +41,7 @@ class Forecast extends BaseController
       'title' => "Prediksi Harga " . ucwords(str_replace('_', ' ', $foodType)),
       'foodType' => $foodType,
       'availableDates' => $availableDates,
+      'isNow' => False,
     ];
 
     return view('forecast', $data);
@@ -67,13 +66,20 @@ class Forecast extends BaseController
 
     array_splice($availableDates, 0, 2);
 
-    if (date('d') == date('d', strtotime('last day of this month'))) {
-      $newMonth = date('Y-F', strtotime('first day of next month'));
-      $availableDates[] = $newMonth;
-    }
+    $newMonthYear = date('Y-n', strtotime('first day of this month'));
+    $availableDates[] = $newMonthYear;
+    $newMonth = date('n', strtotime('first day of this month'));
+    $newYear = date('Y', strtotime('first day of this month'));
 
     $predictData = $this->predict($month, $year, $foodType);
-    $realData = $dashboardController->getData($month, $year, $foodType);
+
+    if ($newMonth == $month && $newYear == $year) {
+      $realData = $this->predict($month, $year, $foodType);
+      $isNow = True;
+    } else {
+      $realData = $dashboardController->getData($month, $year, $foodType);
+      $isNow = False;
+    }
 
     $data = [
       'predictData' => $predictData,
@@ -83,6 +89,7 @@ class Forecast extends BaseController
       'title' => "Prediksi Harga " . ucwords(str_replace('_', ' ', $foodType)),
       'foodType' => $foodType,
       'availableDates' => $availableDates,
+      'isNow' => $isNow,
     ];
 
     return view('forecast', $data);
@@ -97,34 +104,34 @@ class Forecast extends BaseController
     // // Tunggu beberapa detik agar API bisa siap menerima request
     // sleep(10);
 
-    if ($foodType == 'bawang_merah'){
+    if ($foodType == 'bawang_merah') {
       $n_models = 1;
       $n_scalers = 1;
-    } else if ($foodType == 'bawang_putih'){
+    } else if ($foodType == 'bawang_putih') {
       $n_models = 2;
       $n_scalers = 2;
-    } else if ($foodType == 'cabai_merah_keriting'){
+    } else if ($foodType == 'cabai_merah_keriting') {
       $n_models = 3;
       $n_scalers = 3;
-    } else if ($foodType == 'cabai_rawit_merah'){
+    } else if ($foodType == 'cabai_rawit_merah') {
       $n_models = 4;
       $n_scalers = 4;
-    } else if ($foodType == 'daging_sapi'){
+    } else if ($foodType == 'daging_sapi') {
       $n_models = 5;
       $n_scalers = 5;
-    } else if ($foodType == 'daging_ayam'){
+    } else if ($foodType == 'daging_ayam') {
       $n_models = 6;
       $n_scalers = 6;
-    }else if ($foodType == 'telur_ayam'){
+    } else if ($foodType == 'telur_ayam') {
       $n_models = 7;
       $n_scalers = 7;
-    } else if ($foodType == 'beras'){
+    } else if ($foodType == 'beras') {
       $n_models = 8;
       $n_scalers = 8;
     } else {
       $n_models = 9;
       $n_scalers = 9;
-    } 
+    }
 
     $data = [
       'data' => $this->getInputX($month, $year, $foodType),
@@ -169,9 +176,9 @@ class Forecast extends BaseController
     $prices = json_decode($result, false);
     $n = date("t", mktime(0, 0, 0, $month, 1, $year));
 
-    array_splice($prices, -(count($prices) - $n), (count($prices) - $n));
+    array_splice($prices, - (count($prices) - $n), (count($prices) - $n));
 
-    for ($i=1; $i <= $n; $i++) { 
+    for ($i = 1; $i <= $n; $i++) {
       $days[] = $i;
     }
 
@@ -203,7 +210,7 @@ class Forecast extends BaseController
 
   public function getInputX($month, $year, $foodType)
   {
-    $endDate = date("Y-m-t", mktime(0, 0, 0, $month-1, 1, $year));
+    $endDate = date("Y-m-t", mktime(0, 0, 0, $month - 1, 1, $year));
 
     $datasetModel = new datasetModel();
 

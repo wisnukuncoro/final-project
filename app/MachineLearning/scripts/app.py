@@ -4,38 +4,6 @@ import pickle
 from flask import Flask, request, jsonify
 import tensorflow as tf
 import numpy as np
-import calendar
-from datetime import datetime
-
-def get_num_days():
-    # Mendapatkan bulan dan tahun saat ini
-    now = datetime.now()
-    current_year = now.year
-    current_month = now.month
-    current_day = now.day
-
-    # Mendapatkan jumlah hari dalam bulan ini
-    _, num_days_current_month = calendar.monthrange(current_year, current_month)
-    
-    # Cek apakah hari ini adalah hari terakhir dalam bulan ini
-    if current_day == num_days_current_month:
-        # Menghitung bulan dan tahun berikutnya
-        if current_month == 12:  # Jika bulan ini adalah Desember
-            next_year = current_year + 1
-            next_month = 1
-        else:
-            next_year = current_year
-            next_month = current_month + 1
-
-        # Mendapatkan jumlah hari dalam bulan depan
-        _, num_days = calendar.monthrange(next_year, next_month)
-    else:
-        # Jika belum hari terakhir, gunakan jumlah hari dalam bulan ini
-        num_days = num_days_current_month
-
-    return num_days
-
-num_days = get_num_days()
 
 app = Flask(__name__)
 
@@ -73,7 +41,6 @@ def predict():
   input_data = np.array(data)
   
   input_data = input_data.reshape((1,-1,1))
-  print(input_data.shape)
 
   predictions = model.predict(input_data)
   
@@ -83,4 +50,4 @@ def predict():
   return jsonify(original_values.tolist())
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

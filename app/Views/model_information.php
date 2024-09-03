@@ -19,203 +19,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="card-style mb-30">
-            <p class="text-sm mb-20">
-              Metrik Evaluasi Pada Data Uji
-            </p>
-            <div class="table-wrapper table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>
-                      <h6>Jenis Sembako</h6>
-                    </th>
-                    <th>
-                      <h6>Mean Squared Error (MSE)</h6>
-                    </th>
-                    <th>
-                      <h6>Root Mean Squared Error (RMSE)</h6>
-                    </th>
-                    <th>
-                      <h6>Mean Absolute Error (MAE)</h6>
-                    </th>
-                    <th>
-                      <h6>R-squared (R<sup>2</sup>)</h6>
-                    </th>
-                  </tr>
-                  <!-- end table row-->
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <p>Bawang Merah</p>
-                    </td>
-                    <td>
-                      <p>0.0023</p>
-                    </td>
-                    <td>
-                      <p>0.045</p>
-                    </td>
-                    <td>
-                      <p>0.029</p>
-                    </td>
-                    <td>
-                      <p>0.052</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>Bawang Putih</p>
-                    </td>
-                    <td>
-                      <p>0.032</p>
-                    </td>
-                    <td>
-                      <p>0.015</p>
-                    </td>
-                    <td>
-                      <p>0.067</p>
-                    </td>
-                    <td>
-                      <p>0.040</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>Cabai Merah Keriting</p>
-                    </td>
-                    <td>
-                      <p>0.03</p>
-                    </td>
-                    <td>
-                      <p>0.021</p>
-                    </td>
-                    <td>
-                      <p>0.024</p>
-                    </td>
-                    <td>
-                      <p>0.053</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>Cabai Rawit Merah</p>
-                    </td>
-                    <td>
-                      <p>0.042</p>
-                    </td>
-                    <td>
-                      <p>0.024</p>
-                    </td>
-                    <td>
-                      <p>0.031</p>
-                    </td>
-                    <td>
-                      <p>0.018</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>Daging Sapi</p>
-                    </td>
-                    <td>
-                      <p>0.026</p>
-                    </td>
-                    <td>
-                      <p>0.031</p>
-                    </td>
-                    <td>
-                      <p>0.029%</p>
-                    </td>
-                    <td>
-                      <p>0.036</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>Daging Ayam</p>
-                    </td>
-                    <td>
-                      <p>0.027</p>
-                    </td>
-                    <td>
-                      <p>0.035</p>
-                    </td>
-                    <td>
-                      <p>0.019</p>
-                    </td>
-                    <td>
-                      <p>0.016</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>Telur Ayam</p>
-                    </td>
-                    <td>
-                      <p>0.042</p>
-                    </td>
-                    <td>
-                      <p>0.032</p>
-                    </td>
-                    <td>
-                      <p>0.014</p>
-                    </td>
-                    <td>
-                      <p>0.021</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>Beras</p>
-                    </td>
-                    <td>
-                      <p>0.023</p>
-                    </td>
-                    <td>
-                      <p>0.039</p>
-                    </td>
-                    <td>
-                      <p>0.015</p>
-                    </td>
-                    <td>
-                      <p>0.014</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p>Minyak Goreng</p>
-                    </td>
-                    <td>
-                      <p>0.032</p>
-                    </td>
-                    <td>
-                      <p>0.021</p>
-                    </td>
-                    <td>
-                      <p>0.025</p>
-                    </td>
-                    <td>
-                      <p>0.019</p>
-                    </td>
-                  </tr>
-                  <!-- end table row -->
-                </tbody>
-              </table>
-              <!-- end table -->
-            </div>
-          </div>
-          <!-- end card -->
-        </div>
-        <!-- end col -->
-      </div>
-      <!-- end row -->
-    </div>
-
-    <div class="tables-wrapper">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card-style mb-30">
-            <p class="text-sm mb-20">
+            <p class="text-xl mb-20">
               Hyperparameter yang digunakan
             </p>
             <div class="table-wrapper table-responsive">
@@ -223,54 +27,54 @@
                 <thead>
                   <tr>
                     <th>
-                      <h6>Parameter</h6>
+                      <p>Parameter</p>
                     </th>
                     <th>
-                      <h6>Value</h6>
+                      <p>Value</p>
                     </th>
                   </tr>
                   <!-- end table row-->
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
+                    <th>
                       <p>Optimizer</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>Adam</p>
-                    </td>
+                    </th>
                   </tr>
                   <tr>
-                    <td>
+                    <th>
                       <p>Loss Function</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>Mean Squared Error</p>
-                    </td>
+                    </th>
                   </tr>
                   <tr>
-                    <td>
+                    <th>
                       <p>Epoch</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>20</p>
-                    </td>
+                    </th>
                   </tr>
                   <tr>
-                    <td>
+                    <th>
                       <p>Batch Size</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>32</p>
-                    </td>
+                    </th>
                   </tr>
                   <tr>
-                    <td>
+                    <th>
                       <p>Validation Data</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>valX, valY</p>
-                    </td>
+                    </th>
                   </tr>
                   <!-- end table row -->
                 </tbody>
@@ -297,108 +101,108 @@
                 <thead>
                   <tr>
                     <th>
-                      <h6>Layer</h6>
+                      <p>Layer</p>
                     </th>
                     <th>
-                      <h6>Tipe Layer</h6>
+                      <p>Tipe Layer</p>
                     </th>
                     <th>
-                      <h6>Units</h6>
+                      <p>Units</p>
                     </th>
                     <th>
-                      <h6>Return Sequences</h6>
+                      <p>Return Sequences</p>
                     </th>
                     <th>
-                      <h6>Activation</h6>
+                      <p>Activation</p>
                     </th>
                   </tr>
                   <!-- end table row-->
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
+                    <th>
                       <p>Input Layer</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>Input</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p> - </p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p> - </p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p> - </p>
-                    </td>
+                    </th>
                   </tr>
                   <tr>
-                    <td>
+                    <th>
                       <p>Hidden Layer 1</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>LSTM</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>256</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>True</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>Tanh (Default)</p>
-                    </td>
+                    </th>
                   </tr>
                   <tr>
-                    <td>
+                    <th>
                       <p>Hidden Layer 2</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>LSTM</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>256</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>True</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>Tanh (Default)</p>
-                    </td>
+                    </th>
                   </tr>
                   <tr>
-                    <td>
+                    <th>
                       <p>Hidden Layer 3</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>LSTM</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>256</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>False</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>Tanh (Default)</p>
-                    </td>
+                    </th>
                   </tr>
                   <tr>
-                    <td>
+                    <th>
                       <p>Output Layer</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>Dense</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>1</p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p> - </p>
-                    </td>
-                    <td>
+                    </th>
+                    <th>
                       <p>ReLU</p>
-                    </td>
+                    </th>
                   </tr>
                   <!-- end table row -->
                 </tbody>
@@ -412,6 +216,415 @@
       </div>
       <!-- end row -->
     </div>
+
+
+    <h4 class="mb-20">Performa Model</h4>
+
+    <h6 class="mb-10">Bawang Merah</h6>
+    <div class="row">
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Squared <br>Error</h6>
+            <h3 class="text-bold mb-10">0.02871</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute <br>Error</h6>
+            <h3 class="text-bold mb-10">0.12687</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Root Mean <br>Squared Error</h6>
+            <h3 class="text-bold mb-10">0.16945</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+       <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute Percentage Error</h6>
+            <h3 class="text-bold mb-10">17.89303</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+
+    <h6 class="mb-10">Bawang Putih</h6>
+    <div class="row">
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Squared <br>Error</h6>
+            <h3 class="text-bold mb-10">0.00659</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute <br>Error</h6>
+            <h3 class="text-bold mb-10">0.06962</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Root Mean <br>Squared Error</h6>
+            <h3 class="text-bold mb-10">0.08123</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+       <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute Percentage Error</h6>
+            <h3 class="text-bold mb-10">8.39094</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+
+    <h6 class="mb-10">Cabai Merah Keriting</h6>
+    <div class="row">
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Squared <br>Error</h6>
+            <h3 class="text-bold mb-10">0.00608</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute <br>Error</h6>
+            <h3 class="text-bold mb-10">0.0607</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Root Mean <br>Squared Error</h6>
+            <h3 class="text-bold mb-10">0.07802</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+       <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute Percentage Error</h6>
+            <h3 class="text-bold mb-10">18.48</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+
+    <h6 class="mb-10">Cabai Rawit Merah</h6>
+    <div class="row">
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Squared <br>Error</h6>
+            <h3 class="text-bold mb-10">0.00585</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute <br>Error</h6>
+            <h3 class="text-bold mb-10">0.06727</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Root Mean <br>Squared Error</h6>
+            <h3 class="text-bold mb-10">0.07654</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+       <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute Percentage Error</h6>
+            <h3 class="text-bold mb-10">19.21</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+
+    <h6 class="mb-10">Daging Sapi</h6>
+    <div class="row">
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Squared <br>Error</h6>
+            <h3 class="text-bold mb-10">0.002</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute <br>Error</h6>
+            <h3 class="text-bold mb-10">0.03524</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Root Mean <br>Squared Error</h6>
+            <h3 class="text-bold mb-10">0.04475</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+       <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute Percentage Error</h6>
+            <h3 class="text-bold mb-10">8.79</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+
+    <h6 class="mb-10">Daging Ayam</h6>
+    <div class="row">
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Squared <br>Error</h6>
+            <h3 class="text-bold mb-10">0.00356</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute <br>Error</h6>
+            <h3 class="text-bold mb-10">0.04423</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Root Mean <br>Squared Error</h6>
+            <h3 class="text-bold mb-10">0.05972</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+       <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute Percentage Error</h6>
+            <h3 class="text-bold mb-10">15.89</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+
+    <h6 class="mb-10">Telur Ayam</h6>
+    <div class="row">
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Squared <br>Error</h6>
+            <h3 class="text-bold mb-10">0.00234</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute <br>Error</h6>
+            <h3 class="text-bold mb-10">0.02590</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Root Mean <br>Squared Error</h6>
+            <h3 class="text-bold mb-10">0.03677</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+       <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute Percentage Error</h6>
+            <h3 class="text-bold mb-10">12.64</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+
+    <h6 class="mb-10">Beras</h6>
+    <div class="row">
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Squared <br>Error</h6>
+            <h3 class="text-bold mb-10">0.00948</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute <br>Error</h6>
+            <h3 class="text-bold mb-10">0.12056</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Root Mean <br>Squared Error</h6>
+            <h3 class="text-bold mb-10">0.09216</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+       <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute Percentage Error</h6>
+            <h3 class="text-bold mb-10">9.32</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+
+    <h6 class="mb-10">Minyak Goreng</h6>
+    <div class="row">
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Squared <br>Error</h6>
+            <h3 class="text-bold mb-10">0.00152</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute <br>Error</h6>
+            <h3 class="text-bold mb-10">0.00321</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+      <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Root Mean <br>Squared Error</h6>
+            <h3 class="text-bold mb-10">0.01924</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+       <div class="col-xl-3 col-lg-3 col-sm-6">
+        <div class="icon-card mb-30">
+          <div class="content">
+            <h6 class="mb-10">Mean Absolute Percentage Error</h6>
+            <h3 class="text-bold mb-10">6.42</h3>
+          </div>
+        </div>
+        <!-- End Icon Cart -->
+      </div>
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+
 </section>
 
 <!-- ========= All Javascript files linkup ======== -->

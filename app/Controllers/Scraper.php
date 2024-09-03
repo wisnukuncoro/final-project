@@ -12,7 +12,7 @@ class Scraper extends BaseController
   {
     $datasetModel = new DatasetModel();
 
-    $date = date('Y-m-31 00:00:00');
+    $date = date('Y-m-2 00:00:00');
     $hour = date('H');
 
     $message = $datasetModel->getStatusForInputData($date);
@@ -20,10 +20,10 @@ class Scraper extends BaseController
       return redirect()->to('dashboard')->with('message', $message)->with('type', 'Error!');
     }
 
-    if($hour <= 6) {
-      $message = "Data Belum Tersedia, Tunggu Hingga Jam 15.00 WIB Untuk Input Data Harga Hari Ini!";
-      return redirect()->to('dashboard')->with('message', $message)->with('type', 'Error!');
-    }
+    // if($hour) {
+    //   $message = "Data Belum Tersedia, Tunggu Hingga Jam 15.00 WIB Untuk Input Data Harga Hari Ini!";
+    //   return redirect()->to('dashboard')->with('message', $message)->with('type', 'Error!');
+    // }
 
     // shell_exec('')
     $output = shell_exec(ROOTPATH . '.venv/Scripts/activate && python ' . APPPATH . 'MachineLearning/scripts/data_scraper.py');

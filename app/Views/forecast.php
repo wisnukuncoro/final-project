@@ -2,13 +2,15 @@
 
 <?= $this->section('content'); ?>
 
+<?php $currentDates = date('M Y'); ?>
+
 <!-- ========== section start ========== -->
 <section class="section">
   <div class="container-fluid">
     <!-- ========== title-wrapper start ========== -->
     <div class="title-wrapper pt-30">
       <div class="row align-items-center">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="title">
             <h1><?= $title; ?></h1>
             <h4 class="mt-15"><?= $predictData['detailedMonth'] . " " . $predictData['year']; ?></h4>
@@ -18,11 +20,8 @@
       <!-- end row -->
     </div>
 
-    <?php
-    $currentMonth = date('n'); // Bulan (1-12)
-    $currentYear = date('Y'); // Tahun (4 digit)
-    ?>
-
+    <h6 class="mb-10">Data yang dapat diprediksi: </h6>
+    <h6 class="mb-20">May 2021 - <?= $currentDates; ?></h6>
     <form action="/forecast" method="post" id="MyForm">
       <div class="row">
         <div class="col-xl-3 col-lg-3 col-sm-12">
@@ -129,62 +128,6 @@
             <h3 class="text-bold mb-10">Rp<?= number_format($predictData['averagePrice'], 0, ',', '.'); ?></h3>
             <p class="text-sm text">
               <?= $predictData['detailedMonth'] . " " . $year; ?>
-            </p>
-          </div>
-        </div>
-        <!-- End Icon Cart -->
-      </div>
-      <!-- End Col -->
-    </div>
-    <!-- End Row -->
-
-    <!-- ========== title-wrapper end ========== -->
-    <div class="row">
-      <div class="col-xl-4 col-lg-4 col-sm-12">
-        <div class="icon-card mb-30">
-          <div class="icon danger">
-            <i class="lni lni-stats-down"></i>
-          </div>
-          <div class="content">
-            <h4 class="mb-20">True Values</h4>
-            <h6 class="mb-10">Harga Terendah</h6>
-            <h3 class="text-bold mb-10">Rp<?= number_format($realData['lowestPrice'], 0, ',', '.'); ?></h3>
-            <p class="text-sm text">
-              <?= $realData['lowestPriceDate'] . " " . $realData['detailedMonth'] . " " . $year; ?>
-            </p>
-          </div>
-        </div>
-        <!-- End Icon Cart -->
-      </div>
-      <!-- End Col -->
-      <div class="col-xl-4 col-lg-4 col-sm-12">
-        <div class="icon-card mb-30">
-          <div class="icon success">
-            <i class="lni lni-stats-up"></i>
-          </div>
-          <div class="content">
-            <h4 class="mb-20">True Values</h4>
-            <h6 class="mb-10">Harga Tertinggi</h6>
-            <h3 class="text-bold mb-10">Rp<?= number_format($realData['highestPrice'], 0, ',', '.'); ?></h3>
-            <p class="text-sm text">
-              <?= $realData['highestPriceDate'] . " " . $realData['detailedMonth'] . " " . $year; ?>
-            </p>
-          </div>
-        </div>
-        <!-- End Icon Cart -->
-      </div>
-      <!-- End Col -->
-      <div class="col-xl-4 col-lg-4 col-sm-12">
-        <div class="icon-card mb-30">
-          <div class="icon primary">
-            <i class="lni lni-pulse"></i>
-          </div>
-          <div class="content">
-            <h4 class="mb-20">True Values</h4>
-            <h6 class="mb-10">Harga Rata-rata</h6>
-            <h3 class="text-bold mb-10">Rp<?= number_format($realData['averagePrice'], 0, ',', '.'); ?></h3>
-            <p class="text-sm text">
-              <?= $realData['detailedMonth'] . " " . $year; ?>
             </p>
           </div>
         </div>
@@ -342,7 +285,9 @@
         pointRadius: 8,
         pointHoverRadius: 8,
         cubicInterpolationMode: "monotone", // Add this line for curved line
-      }, {
+      }, 
+      
+      <?php if (!$isNow) : ?> {
         label: "Real Values",
         backgroundColor: "transparent",
         borderColor: "#76ABAE",
@@ -356,7 +301,9 @@
         pointRadius: 8,
         pointHoverRadius: 8,
         cubicInterpolationMode: "monotone", // Add this line for curved line
-      }],
+      } <?php endif; ?>
+      ],
+
     },
     options: {
       plugins: {
